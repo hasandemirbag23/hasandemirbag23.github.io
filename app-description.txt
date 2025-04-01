@@ -1,0 +1,26 @@
+Ders Tabu Oyunu, ortaokul öğrencileri için tasarlanmış eğlenceli bir eğitsel oyundur. 7 farklı branştan sorular içerir:
+
+• Fen Bilimleri
+• Sosyal Bilgiler
+• Matematik
+• Türkçe
+• Din Kültürü
+• Görsel Sanatlar
+• Müzik
+
+Özellikler:
+✓ Müfredata uygun sorular
+✓ Offline oynanabilir
+✓ Çocuk dostu arayüz
+✓ Yüksek skor tablosu
+✓ Oyun geçmişi
+
+Nasıl Oynanır:
+1. Bir branş seçin
+2. Ana kelimeyi anlatın
+3. Tabu kelimeleri kullanmadan anlatmaya çalışın
+4. Doğru anlatım: +1 puan
+5. Tabu kelime kullanımı: -1 puan
+6. Pas geçme: 0 puan
+
+Eğlenceli ve öğretici bir deneyim için hemen indirin! 

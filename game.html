@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#4CAF50">
+    <meta name="description" content="Ortaokul müfredatına uygun eğitsel tabu oyunu">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Tabu Okulu">
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="icons/icon-192x192.png">
+    <link rel="apple-touch-startup-image" href="icons/splash.png">
+    <title>Tabu Okulu - Oyun</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="game-header">
+            <h1 id="branch-title"></h1>
+            <div class="score-time">
+                <div class="score">Skor: <span id="score">0 - 0</span></div>
+                <div class="timer">Süre: <span id="timer">60</span></div>
+                <div class="team">Sıra: <span id="current-team">-</span></div>
+                <div class="pass">Pas Hakkı: <span id="pass-count">3</span></div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-front">
+                <h2 id="main-word"></h2>
+                <ul id="tabu-list"></ul>
+            </div>
+        </div>
+
+        <div class="game-buttons">
+            <button id="correct-btn" class="game-btn correct">Doğru</button>
+            <button id="pass-btn" class="game-btn pass">Pas</button>
+            <button id="tabu-btn" class="game-btn wrong">Tabu</button>
+        </div>
+    </div>
+
+    <div id="score-modal" class="modal">
+        <div class="modal-content">
+            <h2>Oyun Bitti!</h2>
+            <p>Toplam Puan: <span id="final-score">0</span></p>
+            
+            <div class="scores-container">
+                <div class="high-scores">
+                    <h3>Yüksek Puanlar</h3>
+                    <ul id="high-scores-list"></ul>
+                </div>
+                
+                <div class="game-history">
+                    <h3>Son Oyunlar</h3>
+                    <ul id="game-history-list"></ul>
+                </div>
+            </div>
+            
+            <div class="modal-buttons">
+                <button class="modal-btn play-again-btn" onclick="location.reload()">Tekrar Oyna</button>
+                <button class="modal-btn home-btn" onclick="window.location.href='index.html'">Ana Sayfa</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="team-name-modal" class="modal">
+        <div class="modal-content">
+            <h2>Takım İsimlerini Belirleyin</h2>
+            <div class="team-inputs">
+                <div class="team-input">
+                    <label for="team1-name">1. Takım İsmi:</label>
+                    <input type="text" id="team1-name" placeholder="1. Takım">
+                </div>
+                <div class="team-input">
+                    <label for="team2-name">2. Takım İsmi:</label>
+                    <input type="text" id="team2-name" placeholder="2. Takım">
+                </div>
+            </div>
+            <button id="start-game-btn">Oyunu Başlat</button>
+        </div>
+    </div>
+
+    <div id="team-transition-modal" class="modal">
+        <div class="modal-content">
+            <h2>1. Tur Bitti!</h2>
+            <div class="team-stats">
+                <p><span class="team1-color" id="team1-result"></span></p>
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <span class="stat-label">Doğru:</span>
+                        <span id="team1-correct" class="stat-value"></span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Yanlış:</span>
+                        <span id="team1-wrong" class="stat-value"></span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Pas:</span>
+                        <span id="team1-pass" class="stat-value"></span>
+                    </div>
+                </div>
+            </div>
+            <p>Şimdi sıra <span class="team2-color" id="next-team-name"></span> takımında!</p>
+            <button id="start-next-turn" class="next-turn-btn">2. Turu Başlat</button>
+        </div>
+    </div>
+
+    <audio id="correct-sound" src="sounds/correct.mp3"></audio>
+    <audio id="wrong-sound" src="sounds/wrong.mp3"></audio>
+    <audio id="pass-sound" src="sounds/pass.mp3"></audio>
+    <audio id="time-up-sound" src="sounds/time-up.mp3"></audio>
+    <audio id="game-over-sound" src="sounds/game-over.mp3"></audio>
+
+    <script src="game.js"></script>
+</body>
+</html> 

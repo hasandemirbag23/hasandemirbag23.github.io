@@ -1,0 +1,98 @@
+{
+    "name": "Tabu Okulu",
+    "short_name": "Tabu Okulu",
+    "description": "Ortaokul müfredatına uygun eğitsel tabu oyunu",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#ffffff",
+    "theme_color": "#4CAF50",
+    "orientation": "portrait",
+    "icons": [
+        {
+            "src": "icons/icon-72x72.png",
+            "sizes": "72x72",
+            "type": "image/png",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "icons/icon-96x96.png",
+            "sizes": "96x96",
+            "type": "image/png",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "icons/icon-128x128.png",
+            "sizes": "128x128",
+            "type": "image/png",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "icons/icon-144x144.png",
+            "sizes": "144x144",
+            "type": "image/png",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "icons/icon-152x152.png",
+            "sizes": "152x152",
+            "type": "image/png",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "icons/icon-192x192.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "icons/icon-384x384.png",
+            "sizes": "384x384",
+            "type": "image/png",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "icons/icon-512x512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any maskable"
+        }
+    ],
+    "screenshots": [
+        {
+            "src": "screenshots/screenshot1.png",
+            "sizes": "1280x720",
+            "type": "image/png",
+            "platform": "wide",
+            "label": "Ana Sayfa"
+        },
+        {
+            "src": "screenshots/screenshot2.png",
+            "sizes": "1280x720",
+            "type": "image/png",
+            "platform": "wide",
+            "label": "Oyun Ekranı"
+        }
+    ],
+    "categories": ["education", "games"],
+    "lang": "tr",
+    "dir": "ltr",
+    "prefer_related_applications": false,
+    "shortcuts": [
+        {
+            "name": "Yeni Oyun",
+            "short_name": "Yeni Oyun",
+            "description": "Yeni bir oyun başlat",
+            "url": "/?action=new-game",
+            "icons": [{ "src": "icons/new-game.png", "sizes": "192x192" }]
+        },
+        {
+            "name": "Yüksek Skorlar",
+            "short_name": "Yüksek Skorlar",
+            "description": "En yüksek skorları görüntüle",
+            "url": "/?action=high-scores",
+            "icons": [{ "src": "icons/high-scores.png", "sizes": "192x192" }]
+        }
+    ],
+    "related_applications": [],
+    "iarc_rating_id": "e84b072d-71b3-4d3e-86ae-31a8ce4e53b7"
+} 

@@ -1,0 +1,160 @@
+{
+    "fen": [
+        {
+            "mainWord": "Güneş",
+            "tabuWords": ["Yıldız", "Gezegen", "Isı", "Sıcak", "Gündüz"]
+        },
+        {
+            "mainWord": "DNA",
+            "tabuWords": ["Gen", "Kromozom", "Kalıtım", "Hücre", "Nükleik"]
+        },
+        {
+            "mainWord": "FOTOSENTEZ",
+            "tabuWords": ["Klorofil", "Oksijen", "Karbondioksit", "Bitki"]
+        },
+        {
+            "mainWord": "ELEKTRİK",
+            "tabuWords": ["Akım", "Volt", "Pil", "Ampul", "Elektron"]
+        },
+        {
+            "mainWord": "YERÇEKİMİ",
+            "tabuWords": ["Dünya", "Newton", "Kütle", "Ağırlık", "Çekim"]
+        },
+        {
+            "mainWord": "ELEMENT",
+            "tabuWords": ["Atom", "Periyodik", "Metal", "Sembol", "Bileşik"]
+        }
+    ],
+    "sosyal": [
+        {
+            "mainWord": "OSMANLI",
+            "tabuWords": ["Padişah", "İstanbul", "Fatih", "Sultan", "Devlet"]
+        },
+        {
+            "mainWord": "İstanbul",
+            "tabuWords": ["Boğaz", "Fatih", "Osmanlı", "Başkent", "Marmara"]
+        },
+        {
+            "mainWord": "ANADOLU",
+            "tabuWords": ["Türkiye", "Yarımada", "Asya", "Medeniyet", "Tarih"]
+        },
+        {
+            "mainWord": "KURTULUŞ SAVAŞI",
+            "tabuWords": ["Atatürk", "İstiklal", "Mondros", "Sevr", "TBMM"]
+        },
+        {
+            "mainWord": "DEMOKRASİ",
+            "tabuWords": ["Seçim", "Halk", "Özgürlük", "Parlamento", "Cumhuriyet"]
+        }
+    ],
+    "matematik": [
+        {
+            "mainWord": "ÜÇGEN",
+            "tabuWords": ["Açı", "Kenar", "Pisagor", "Alan", "Hipotenüs"]
+        },
+        {
+            "mainWord": "DENKLEM",
+            "tabuWords": ["X", "Bilinmeyen", "Çözüm", "Eşitlik", "İkinci Derece"]
+        },
+        {
+            "mainWord": "FONKSİYON",
+            "tabuWords": ["Grafik", "Değişken", "Bağımlı", "Türev", "İntegral"]
+        },
+        {
+            "mainWord": "KARE",
+            "tabuWords": ["Dörtgen", "Alan", "Çevre", "Köşe", "Kenar"]
+        },
+        {
+            "mainWord": "Pİ SAYISI",
+            "tabuWords": ["3.14", "Çember", "Çap", "Yarıçap", "Alan"]
+        }
+    ],
+    "turkce": [
+        {
+            "mainWord": "ROMAN",
+            "tabuWords": ["Kitap", "Yazar", "Hikaye", "Karakter", "Sayfa"]
+        },
+        {
+            "mainWord": "ŞİİR",
+            "tabuWords": ["Şair", "Mısra", "Kafiye", "Dize", "Nazım"]
+        },
+        {
+            "mainWord": "KARAKTER",
+            "tabuWords": ["Kişi", "Roman", "Hikaye", "Rol", "Oyuncu"]
+        },
+        {
+            "mainWord": "DİYALOG",
+            "tabuWords": ["Konuşma", "Karakter", "Tırnak", "Sohbet", "İki"]
+        },
+        {
+            "mainWord": "BETİMLEME",
+            "tabuWords": ["Tasvir", "Açıklama", "Detay", "Görsel", "Resim"]
+        }
+    ],
+    "din": [
+        {
+            "mainWord": "NAMAZ",
+            "tabuWords": ["Vakit", "Rekat", "Abdest", "Kıble", "Ezan"]
+        },
+        {
+            "mainWord": "ORUÇ",
+            "tabuWords": ["Ramazan", "İftar", "Sahur", "Açlık", "Süre"]
+        },
+        {
+            "mainWord": "KURAN",
+            "tabuWords": ["Ayet", "Sure", "Mushaf", "Vahiy", "Peygamber"]
+        },
+        {
+            "mainWord": "HAC",
+            "tabuWords": ["Mekke", "Kabe", "İhram", "Umre", "Müslüman"]
+        },
+        {
+            "mainWord": "ZEKAT",
+            "tabuWords": ["Sadaka", "Fakir", "Yüzde", "Para", "Mallar"]
+        }
+    ],
+    "gorsel": [
+        {
+            "mainWord": "RESİM",
+            "tabuWords": ["Boyama", "Fırça", "Boya", "Tuval", "Sanat"]
+        },
+        {
+            "mainWord": "HEYKEL",
+            "tabuWords": ["Taş", "Mermer", "Heykeltıraş", "Sanat", "Üç Boyut"]
+        },
+        {
+            "mainWord": "MİMARİ",
+            "tabuWords": ["Bina", "Yapı", "Tasarım", "Mimar", "Plan"]
+        },
+        {
+            "mainWord": "RENK",
+            "tabuWords": ["Boyama", "Palet", "Fırça", "Tona", "Pigment"]
+        },
+        {
+            "mainWord": "PERSPEKTİF",
+            "tabuWords": ["Derinlik", "Uzaklık", "Çizim", "Nokta", "Kaçış"]
+        }
+    ],
+    "muzik": [
+        {
+            "mainWord": "NOTA",
+            "tabuWords": ["Müzik", "Ses", "Porte", "Sol", "Fa"]
+        },
+        {
+            "mainWord": "ENSTRÜMAN",
+            "tabuWords": ["Çalgı", "Müzik", "Ses", "Çalmak", "Alet"]
+        },
+        {
+            "mainWord": "RİTİM",
+            "tabuWords": ["Tempo", "Vuruş", "Darbuka", "Davul", "Müzik"]
+        },
+        {
+            "mainWord": "MELODİ",
+            "tabuWords": ["Şarkı", "Nota", "Müzik", "Ezgi", "Türkü"]
+        },
+        {
+            "mainWord": "ORKESTRA",
+            "tabuWords": ["Enstrüman", "Şef", "Konser", "Müzik", "Sahne"]
+        }
+    ]
+} 
