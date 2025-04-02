@@ -251,7 +251,6 @@ h2 {
 }
 
 /* Skor ve Zaman Göstergeleri */
-/* Skor ve Zaman Göstergeleri */
 .score-time {
     position: fixed;
     top: 20px;
@@ -262,6 +261,31 @@ h2 {
     font-size: 1.2em;
     color: #2c3e50;
     z-index: 100;
+}
+
+@media (max-width: 768px) {
+    .score-time {
+        position: relative;
+        top: auto;
+        right: auto;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+        margin-bottom: 15px;
+        width: 100%;
+    }
+    
+    .timer, .score, .team, .pass {
+        font-size: 0.9em;
+        padding: 8px 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .score-time {
+        grid-template-columns: 1fr;
+        gap: 5px;
+    }
 }
 
 .timer {
@@ -539,18 +563,91 @@ h2 {
 }
 
 /* Responsive Tasarım */
-@media (max-width: 600px) {
+@media (max-width: 768px) {
     .container {
         padding: 20px;
+        margin: 10px;
     }
 
     h1 {
-        font-size: 2em;
+        font-size: 1.8em;
+    }
+
+    h2 {
+        font-size: 1.5em;
+    }
+
+    .branch-buttons {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+        padding: 10px;
+    }
+
+    .branch-buttons button {
+        padding: 15px;
+        font-size: 1em;
+    }
+
+    .game-buttons {
+        gap: 10px;
+    }
+
+    .game-buttons button {
+        padding: 12px 20px;
+        font-size: 1em;
+    }
+
+    .modal-content {
+        width: 95%;
+        padding: 20px 15px;
+        max-height: 90vh;
+        overflow-y: auto;
+    }
+
+    #final-score .team-stats p {
+        font-size: 1.5em;
+    }
+
+    #final-score .stat-value {
+        font-size: 1.8em;
+    }
+
+    .modal-buttons {
+        padding-top: 15px;
+    }
+
+    .modal-btn {
+        padding: 12px 25px;
+        font-size: 1.1em;
+    }
+
+    .team-stats {
+        padding: 15px;
+        margin: 15px 0;
+    }
+
+    .stats-grid {
+        gap: 10px;
+    }
+
+    .stat-label {
+        font-size: 0.9em;
+    }
+}
+
+@media (max-width: 600px) {
+    .container {
+        padding: 15px;
+    }
+
+    h1 {
+        font-size: 1.5em;
     }
 
     .branch-buttons {
         grid-template-columns: 1fr;
-        gap: 15px;
+        gap: 10px;
+        padding: 5px;
     }
 
     .game-buttons {
@@ -563,7 +660,89 @@ h2 {
 
     .modal-content {
         width: 95%;
-        padding: 20px;
+        padding: 15px;
+    }
+
+    #final-score .team-stats {
+        padding: 15px;
+        margin: 15px 0;
+    }
+
+    #final-score .stats-grid {
+        gap: 8px;
+    }
+
+    #final-score .stat-item {
+        padding: 10px;
+    }
+
+    #final-score .stat-label {
+        font-size: 0.8em;
+    }
+
+    #final-score .stat-value {
+        font-size: 1.5em;
+    }
+
+    .modal-buttons {
+        flex-direction: column;
+        padding-top: 10px;
+    }
+
+    .modal-btn {
+        width: 100%;
+        padding: 10px;
+        font-size: 1em;
+    }
+
+    .team-inputs {
+        gap: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 10px;
+    }
+
+    h1 {
+        font-size: 1.3em;
+    }
+
+    h2 {
+        font-size: 1.1em;
+    }
+
+    .game-card {
+        padding: 15px;
+    }
+
+    .main-word {
+        font-size: 1.8em;
+    }
+
+    #tabu-list li {
+        padding: 10px;
+        font-size: 1em;
+    }
+
+    .team-stats {
+        padding: 10px;
+        margin: 10px 0;
+    }
+
+    .stats-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 8px;
+    }
+
+    #final-score .stats-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .modal-content h2 {
+        font-size: 1.2em;
     }
 }
 
