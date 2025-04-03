@@ -77,7 +77,8 @@ h2 {
 
 .branch-buttons button {
     padding: 20px;
-    font-size: 1.2em;
+    font-size: 1.5em;
+    font-weight: bold;
     border: none;
     border-radius: 15px;
     cursor: pointer;
@@ -85,7 +86,7 @@ h2 {
     position: relative;
     overflow: hidden;
     color: white;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
@@ -96,7 +97,7 @@ h2 {
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(45deg, rgba(255,255,255,0.1), rgba(255,255,255,0));
+    background: linear-gradient(45deg, rgba(255,255,255,0.2), rgba(255,255,255,0));
     transform: translateX(-100%);
     transition: transform 0.3s ease;
 }
@@ -105,59 +106,64 @@ h2 {
     transform: translateX(100%);
 }
 
+.branch-buttons button:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
 /* Her Branş İçin Özel Stiller */
 [data-branch="fen"] {
-    background: linear-gradient(135deg, #4CAF50, #45a049);
-    background-image: url(https://i.pinimg.com/474x/1e/0c/65/1e0c6530f3f3b744266375a1b06ba257.jpg);
+    background: linear-gradient(135deg, #4CAF50, #2D8D30);
+    background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url(https://i.pinimg.com/474x/1e/0c/65/1e0c6530f3f3b744266375a1b06ba257.jpg);
     background-size: cover;
     background-position: center;
 }
 
 [data-branch="sosyal"] {
-    background: linear-gradient(135deg, #2196F3, #1976D2);
-    background-image: url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80');
+    background: linear-gradient(135deg, #2196F3, #0D6AB2);
+    background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80');
     background-size: cover;
     background-position: center;
 }
 
 [data-branch="matematik"] {
-    background: linear-gradient(135deg, #FFC107, #FFA000);
-    background-image: url('https://images.unsplash.com/photo-1635070041078-e363dbe005cb?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80');
+    background: linear-gradient(135deg, #FFC107, #DB9A00);
+    background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1635070041078-e363dbe005cb?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80');
     background-size: cover;
     background-position: center;
 }
 
 [data-branch="turkce"] {
-    background: linear-gradient(135deg, #E91E63, #C2185B);
-    background-image: url('https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80');
+    background: linear-gradient(135deg, #E91E63, #AD124A);
+    background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80');
     background-size: cover;
     background-position: center;
 }
 
 [data-branch="din"] {
-    background: linear-gradient(135deg, #9C27B0, #7B1FA2);
-    background-image: url('https://dogm.eba.gov.tr/panel/upload/etkilesimli/kitap/DKB9/Unite2/files/mobile/1.jpg?200924204344');
+    background: linear-gradient(135deg, #9C27B0, #641971);
+    background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://dogm.eba.gov.tr/panel/upload/etkilesimli/kitap/DKB9/Unite2/files/mobile/1.jpg?200924204344');
     background-size: cover;
     background-position: center;
 }
 
 [data-branch="gorsel"] {
-    background: linear-gradient(135deg, #FF5722, #F4511E);
-    background-image: url('https://images.unsplash.com/photo-1460661419201-fd4cecdf8a8b?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80');
+    background: linear-gradient(135deg, #FF5722, #D1390C);
+    background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1460661419201-fd4cecdf8a8b?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80');
     background-size: cover;
     background-position: center;
 }
 
 [data-branch="muzik"] {
-    background: linear-gradient(135deg, #00BCD4, #0097A7);
-    background-image: url('https://png.pngtree.com/thumb_back/fh260/background/20230527/pngtree-music-pattern-with-music-notes-on-a-dark-background-image_2699195.jpg');
+    background: linear-gradient(135deg, #00BCD4, #007888);
+    background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://png.pngtree.com/thumb_back/fh260/background/20230527/pngtree-music-pattern-with-music-notes-on-a-dark-background-image_2699195.jpg');
     background-size: cover;
     background-position: center;
 }
 
 [data-branch="ingilizce"] {
-    background: linear-gradient(135deg, #3F51B5, #303F9F);
-    background-image: url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80');
+    background: linear-gradient(135deg, #3F51B5, #29377A);
+    background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80');
     background-size: cover;
     background-position: center;
 }
@@ -184,10 +190,42 @@ h2 {
 }
 
 .main-word {
-    font-size: 2.5em;
-    color: #2c3e50;
-    margin-bottom: 20px;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    font-size: 3.2em;
+    font-weight: bold;
+    color: white;
+    margin-bottom: 25px;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+    background: linear-gradient(135deg, #3949ab, #5c6bc0);
+    display: inline-block;
+    padding: 15px 30px;
+    border-radius: 15px;
+    position: relative;
+    animation: pulse 2s infinite alternate;
+    border: 3px solid #3f51b5;
+    box-shadow: 0 5px 15px rgba(63, 81, 181, 0.3);
+}
+
+.main-word::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 12px;
+    z-index: -1;
+}
+
+.main-word::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 70%;
+    height: 3px;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 3px;
 }
 
 #tabu-list {
@@ -1003,4 +1041,4 @@ h2 {
 
 #team1-correct, #team2-correct {
     color: #00C851;
-} 
+}   
