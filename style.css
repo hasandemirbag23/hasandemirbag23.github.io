@@ -241,60 +241,60 @@ h2 {
     background: linear-gradient(90deg, #4CAF50, #2196F3, #FFC107, #E91E63);
 }
 
-.main-word {
-    font-size: 7.5em;
-    font-weight: 900;
+#main-word {
+    font-size: 1.7em;
+    font-weight: 700;
     color: white;
-    margin-bottom: 40px;
-    text-shadow: 4px 4px 18px rgba(0, 0, 0, 0.9), 0 0 40px rgba(233, 30, 99, 1);
-    background: linear-gradient(135deg, #ff0066, #a4006f);
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    background: linear-gradient(135deg, #e91e63, #9c27b0);
     display: inline-block;
-    padding: 40px 80px;
-    border-radius: 30px;
+    padding: 15px 25px;
+    border-radius: 12px;
     position: relative;
-    animation: pulse 2s infinite alternate, textGlow 3s infinite;
-    border: 10px solid #a4006f;
-    box-shadow: 0 25px 60px rgba(156, 39, 176, 0.9);
-    letter-spacing: 6px;
-    transform: perspective(800px) rotateX(5deg);
-    transition: all 0.4s ease;
-    -webkit-text-stroke: 3px #520035;
+    animation: pulse 2s infinite alternate;
+    border: 3px solid #9c27b0;
+    box-shadow: 0 8px 20px rgba(156, 39, 176, 0.6);
+    letter-spacing: 1px;
     overflow: hidden;
     text-transform: uppercase;
-    max-width: 100%;
-    font-family: 'Impact', 'Haettenschweiler', 'Arial Narrow Bold', sans-serif;
 }
 
-.main-word:hover {
-    transform: perspective(800px) rotateX(0deg) scale(1.08);
-    box-shadow: 0 30px 70px rgba(156, 39, 176, 1);
-    text-shadow: 6px 6px 20px rgba(0, 0, 0, 0.9), 0 0 50px rgba(233, 30, 99, 1);
-    border-color: #ff0066;
+@media (max-width: 768px) {
+    #main-word {
+        font-size: 1.6em;
+        padding: 12px 20px;
+    }
 }
 
-.main-word::before {
-    content: "";
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: linear-gradient(45deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.1) 50%, rgba(255,255,255,0) 100%);
-    transform: rotate(45deg);
-    animation: shine 3s infinite;
-    z-index: 1;
+@media (max-width: 600px) {
+    #main-word {
+        font-size: 1.5em;
+        padding: 10px 15px;
+    }
 }
 
-@keyframes shine {
-    0% { transform: rotate(45deg) translateX(-120%); }
-    80% { transform: rotate(45deg) translateX(120%); }
-    100% { transform: rotate(45deg) translateX(120%); }
+@media (max-width: 480px) {
+    #main-word {
+        font-size: 1.4em;
+        padding: 10px;
+    }
 }
 
-@keyframes textGlow {
-    0% { text-shadow: 4px 4px 18px rgba(0, 0, 0, 0.9), 0 0 20px rgba(233, 30, 99, 0.8), 0 0 30px rgba(156, 39, 176, 0.6); }
-    50% { text-shadow: 4px 4px 18px rgba(0, 0, 0, 0.9), 0 0 40px rgba(233, 30, 99, 1), 0 0 70px rgba(156, 39, 176, 0.8); }
-    100% { text-shadow: 4px 4px 18px rgba(0, 0, 0, 0.9), 0 0 20px rgba(233, 30, 99, 0.8), 0 0 30px rgba(156, 39, 176, 0.6); }
+#main-word:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+}
+
+#main-word::before {
+    content: '';
+    margin-right: 15px;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
 }
 
 #tabu-list {
@@ -388,6 +388,14 @@ h2 {
 }
 
 @media (max-width: 768px) {
+    .container {
+        padding: 20px;
+        margin: 10px;
+    }
+
+    h1 { font-size: 1.8em; }
+    h2 { font-size: 1.5em; }
+
     .score-time {
         position: relative;
         top: auto;
@@ -405,37 +413,123 @@ h2 {
         padding: 8px 12px;
     }
 
-    .main-word {
-        font-size: 5em;
-        padding: 30px 50px;
-        border-width: 8px;
-        letter-spacing: 4px;
-        -webkit-text-stroke: 2px #520035;
+    .branch-buttons {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+        padding: 10px;
+    }
+
+    .branch-buttons button {
+        padding: 15px;
+        font-size: 1em;
+    }
+
+    .game-buttons {
+        gap: 10px;
+    }
+
+    .game-buttons button {
+        padding: 12px 20px;
+        font-size: 1em;
+    }
+
+    .modal-content {
+        width: 95%;
+        padding: 20px 15px;
+        max-height: 90vh;
+        overflow-y: auto;
+    }
+
+    #main-word {
+        font-size: 1.6em;
+        padding: 12px 20px;
+    }
+    
+    #tabu-list li {
+        font-size: 1.5em;
+        padding: 12px 20px;
     }
 }
 
 @media (max-width: 600px) {
-    .main-word {
-        font-size: 4em;
-        padding: 25px 40px;
-        border-width: 6px;
-        letter-spacing: 3px;
-        -webkit-text-stroke: 1.5px #520035;
+    .container { padding: 15px; }
+    h1 { font-size: 1.5em; }
+
+    .branch-buttons {
+        grid-template-columns: 1fr;
+        gap: 10px;
+        padding: 5px;
+    }
+
+    .game-buttons {
+        flex-direction: column;
+    }
+
+    .modal-content {
+        width: 95%;
+        padding: 15px;
+    }
+
+    .modal-buttons {
+        flex-direction: column;
+        padding-top: 10px;
+    }
+
+    .modal-btn {
+        width: 100%;
+        padding: 10px;
+        font-size: 1em;
+    }
+
+    #main-word {
+        font-size: 1.5em;
+        padding: 10px 15px;
+    }
+    
+    #tabu-list li {
+        font-size: 1.4em;
+        padding: 10px 15px;
+    }
+    
+    #tabu-list li::before {
+        margin-right: 10px;
     }
 }
 
 @media (max-width: 480px) {
+    .container { padding: 10px; }
+    h1 { font-size: 1.3em; }
+    h2 { font-size: 1.1em; }
+
     .score-time {
         grid-template-columns: 1fr;
         gap: 5px;
     }
 
-    .main-word {
-        font-size: 3.5em;
-        padding: 20px 30px;
-        border-width: 5px;
-        letter-spacing: 2px;
-        -webkit-text-stroke: 1px #520035;
+    .game-card { padding: 15px; }
+
+    #main-word {
+        font-size: 1.4em;
+        padding: 10px;
+    }
+
+    #tabu-list li {
+        padding: 10px 12px;
+        font-size: 1.3em;
+        margin: 10px 0;
+    }
+    
+    #tabu-list li::before {
+        margin-right: 8px;
+        font-size: 0.9em;
+    }
+    
+    #final-score .stats-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .modal-content h2 {
+        font-size: 1.2em;
     }
 }
 
@@ -695,194 +789,6 @@ h2 {
 
 .high-scores li:hover, .game-history li:hover {
     transform: translateX(10px);
-}
-
-/* Responsive Tasarım */
-@media (max-width: 768px) {
-    .container {
-        padding: 20px;
-        margin: 10px;
-    }
-
-    h1 {
-        font-size: 1.8em;
-    }
-
-    h2 {
-        font-size: 1.5em;
-    }
-
-    .branch-buttons {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 15px;
-        padding: 10px;
-    }
-
-    .branch-buttons button {
-        padding: 15px;
-        font-size: 1em;
-    }
-
-    .game-buttons {
-        gap: 10px;
-    }
-
-    .game-buttons button {
-        padding: 12px 20px;
-        font-size: 1em;
-    }
-
-    .modal-content {
-        width: 95%;
-        padding: 20px 15px;
-        max-height: 90vh;
-        overflow-y: auto;
-    }
-
-    #final-score .team-stats p {
-        font-size: 1.5em;
-    }
-
-    #final-score .stat-value {
-        font-size: 1.8em;
-    }
-
-    .modal-buttons {
-        padding-top: 15px;
-    }
-
-    .modal-btn {
-        padding: 12px 25px;
-        font-size: 1.1em;
-    }
-
-    .team-stats {
-        padding: 15px;
-        margin: 15px 0;
-    }
-
-    .stats-grid {
-        gap: 10px;
-    }
-
-    .stat-label {
-        font-size: 0.9em;
-    }
-}
-
-@media (max-width: 600px) {
-    .container {
-        padding: 15px;
-    }
-
-    h1 {
-        font-size: 1.5em;
-    }
-
-    .branch-buttons {
-        grid-template-columns: 1fr;
-        gap: 10px;
-        padding: 5px;
-    }
-
-    .game-buttons {
-        flex-direction: column;
-    }
-
-    .scores-container {
-        grid-template-columns: 1fr;
-    }
-
-    .modal-content {
-        width: 95%;
-        padding: 15px;
-    }
-
-    #final-score .team-stats {
-        padding: 15px;
-        margin: 15px 0;
-    }
-
-    #final-score .stats-grid {
-        gap: 8px;
-    }
-
-    #final-score .stat-item {
-        padding: 10px;
-    }
-
-    #final-score .stat-label {
-        font-size: 0.8em;
-    }
-
-    #final-score .stat-value {
-        font-size: 1.5em;
-    }
-
-    .modal-buttons {
-        flex-direction: column;
-        padding-top: 10px;
-    }
-
-    .modal-btn {
-        width: 100%;
-        padding: 10px;
-        font-size: 1em;
-    }
-
-    .team-inputs {
-        gap: 15px;
-    }
-
-    .main-word {
-        font-size: 3em;
-    }
-}
-
-@media (max-width: 480px) {
-    .container {
-        padding: 10px;
-    }
-
-    h1 {
-        font-size: 1.3em;
-    }
-
-    h2 {
-        font-size: 1.1em;
-    }
-
-    .game-card {
-        padding: 15px;
-    }
-
-    .main-word {
-        font-size: 2.5em;
-    }
-
-    #tabu-list li {
-        padding: 10px;
-        font-size: 1em;
-    }
-
-    .team-stats {
-        padding: 10px;
-        margin: 10px 0;
-    }
-
-    .stats-grid {
-        display: grid;
-        grid-template-columns: 1fr;
-        gap: 8px;
-    }
-
-    #final-score .stats-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .modal-content h2 {
-        font-size: 1.2em;
-    }
 }
 
 /* Özel Scrollbar */
@@ -1149,50 +1055,4 @@ h2 {
     box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
 }
 
-/* Responsive Ayarlamalar */
-@media (max-width: 768px) {
-    .main-word {
-        font-size: 3em;
-        padding: 15px 30px;
-    }
-    
-    #tabu-list li {
-        font-size: 1.5em;
-        padding: 12px 20px;
-    }
-}
-
-@media (max-width: 600px) {
-    .main-word {
-        font-size: 2.5em;
-        padding: 12px 25px;
-        border-width: 3px;
-    }
-    
-    #tabu-list li {
-        font-size: 1.4em;
-        padding: 10px 15px;
-    }
-    
-    #tabu-list li::before {
-        margin-right: 10px;
-    }
-}
-
-@media (max-width: 480px) {
-    .main-word {
-        font-size: 2.2em;
-        padding: 10px 20px;
-    }
-
-    #tabu-list li {
-        padding: 10px 12px;
-        font-size: 1.3em;
-        margin: 10px 0;
-    }
-    
-    #tabu-list li::before {
-        margin-right: 8px;
-        font-size: 0.9em;
-    }
-}   
+/* Bu satırdan sonraki eski responsive kodlar silinebilir çünkü yukarıda ekledim */   
