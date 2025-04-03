@@ -4,8 +4,6 @@ let team2Score = 0;
 let currentTeam = 1;
 let passCount = 3;
 let currentQuestionIndex = 0;
-let usedQuestionIndices = []; // Kullanılan soruların indekslerini tutan dizi
-let unusedQuestions = []; // Henüz kullanılmamış soruların indeksleri
 let questions = [];
 let timeLeft = 90;
 let timerInterval;
@@ -31,14 +29,6 @@ const branchNames = {
 
 const difficultySettings = {
     easy: {
-        time: 120,
-        points: {
-            correct: 1,
-            wrong: -1,
-            pass: 0
-        }
-    },
-    normal: {
         time: 90,
         points: {
             correct: 1,
@@ -46,8 +36,16 @@ const difficultySettings = {
             pass: 0
         }
     },
-    hard: {
+    normal: {
         time: 60,
+        points: {
+            correct: 1,
+            wrong: -1,
+            pass: 0
+        }
+    },
+    hard: {
+        time: 45,
         points: {
             correct: 2,
             wrong: -2,
@@ -1661,8 +1659,11 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('branch-title').textContent = branchNames[selectedBranch];
     questions = allQuestions[selectedBranch];
     
-    // Kullanılmamış soruları başlat
-    resetUnusedQuestions();
+    // Soruları karıştır
+    for (let i = questions.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [questions[i], questions[j]] = [questions[j], questions[i]];
+    }
     
     // Takım isimlerini alma
     document.getElementById('team-name-modal').style.display = 'flex';
@@ -1686,20 +1687,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function showQuestion() {
-    if (!gameActive) return;
-    
-    // Eğer kullanılmamış sorular tükenmişse, soruları sıfırla
-    if (unusedQuestions.length === 0) {
-        resetUnusedQuestions();
-    }
-    
-    // Kullanılmamış sorulardan rastgele bir soru indeksi seç
-    const randomIndex = Math.floor(Math.random() * unusedQuestions.length);
-    currentQuestionIndex = unusedQuestions[randomIndex];
-    
-    // Kullanılan soruyu listeden çıkar
-    unusedQuestions.splice(randomIndex, 1);
-    usedQuestionIndices.push(currentQuestionIndex);
+    if (!gameActive || currentQuestionIndex >= questions.length) return;
     
     const question = questions[currentQuestionIndex];
     document.getElementById('main-word').textContent = question.mainWord;
@@ -1743,13 +1731,15 @@ function updateScore(points) {
         if (passCount > 0) {
             passCount--;
             document.getElementById('pass-count').textContent = passCount;
-            showQuestion(); // Yeni soru göster
+            currentQuestionIndex++;
+            showQuestion();
         }
         if (passCount === 0) {
             document.getElementById('pass-btn').disabled = true;
         }
     } else {
-        showQuestion(); // Yeni soru göster
+        currentQuestionIndex++;
+        showQuestion();
     }
     saveScore();
 }
@@ -1976,32 +1966,14 @@ function startNextTurn() {
         `<span class="current-team team2">${team2Name}</span>`;
     document.querySelector('.timer').classList.remove('warning');
     
-    // 2. tur için soruları sıfırla
-    resetUnusedQuestions();
+    // Soruları yeniden karıştır
+    for (let i = questions.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [questions[i], questions[j]] = [questions[j], questions[i]];
+    }
     
+    currentQuestionIndex = 0;
     gameActive = true;
     showQuestion();
     startTimer();
-}
-
-// Yeni fonksiyon: Kullanılmamış soruları sıfırlar
-function resetUnusedQuestions() {
-    unusedQuestions = [];
-    for (let i = 0; i < questions.length; i++) {
-        unusedQuestions.push(i);
-    }
-    // Eğer önceki turdan kullanılmış sorular varsa, onları çıkar
-    if (isFirstTurn === false && usedQuestionIndices.length > 0) {
-        // Son 10 soruyu tekrar gösterme (veya daha az soru kullanılmışsa tümünü)
-        const lastUsedCount = Math.min(10, usedQuestionIndices.length);
-        const recentlyUsed = usedQuestionIndices.slice(-lastUsedCount);
-        
-        unusedQuestions = unusedQuestions.filter(idx => !recentlyUsed.includes(idx));
-    }
-    
-    // Soruları karıştır
-    for (let i = unusedQuestions.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [unusedQuestions[i], unusedQuestions[j]] = [unusedQuestions[j], unusedQuestions[i]];
-    }
 } 
