@@ -12,10 +12,6 @@ body {
     justify-content: center;
     align-items: center;
     padding: 20px;
-    width: 100% !important;
-    max-width: 100% !important;
-    margin: 0 !important;
-    overflow-x: hidden !important;
 }
 
 .container {
@@ -28,10 +24,6 @@ body {
     text-align: center;
     position: relative;
     overflow: hidden;
-    width: 100% !important;
-    max-width: 800px !important;
-    margin: 0 auto !important;
-    box-sizing: border-box !important;
 }
 
 .container::before {
@@ -273,20 +265,6 @@ h2 {
         font-size: 1.6em;
         padding: 12px 20px;
     }
-
-    .stats-display {
-        padding: 6px 12px;
-    }
-    
-    .stats-display .stat-icon {
-        font-size: 1em;
-        width: 20px;
-        height: 20px;
-    }
-    
-    .stats-display .stat-value {
-        font-size: 0.9em;
-    }
 }
 
 @media (max-width: 600px) {
@@ -300,25 +278,6 @@ h2 {
     #main-word {
         font-size: 1.4em;
         padding: 10px;
-    }
-
-    .stats-display {
-        padding: 5px 10px;
-        gap: 5px;
-    }
-    
-    .stats-display .stat-item {
-        gap: 5px;
-    }
-    
-    .stats-display .stat-icon {
-        font-size: 0.9em;
-        width: 18px;
-        height: 18px;
-    }
-    
-    .stats-display .stat-value {
-        font-size: 0.8em;
     }
 }
 
@@ -1096,136 +1055,4 @@ h2 {
     box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
 }
 
-/* Bu satırdan sonraki eski responsive kodlar silinebilir çünkü yukarıda ekledim */
-
-.difficulty-selection {
-    margin-top: 20px;
-    border-top: 1px solid #e3e3e3;
-    padding-top: 15px;
-}
-
-.difficulty-selection h3 {
-    margin-bottom: 15px;
-    font-size: 1.2em;
-    color: #333;
-}
-
-.difficulty-buttons {
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-    margin-bottom: 15px;
-}
-
-.difficulty-btn {
-    padding: 8px 20px;
-    border: none;
-    border-radius: 25px;
-    background: linear-gradient(to bottom, #f5f5f5, #e3e3e3);
-    color: #333;
-    font-weight: bold;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-}
-
-.difficulty-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
-}
-
-.difficulty-btn.active {
-    background: linear-gradient(to bottom, #4CAF50, #45a049);
-    color: white;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-}
-
-.difficulty-btn[data-difficulty="easy"].active {
-    background: linear-gradient(to bottom, #4CAF50, #45a049);
-}
-
-.difficulty-btn[data-difficulty="normal"].active {
-    background: linear-gradient(to bottom, #2196F3, #1976D2);
-}
-
-.difficulty-btn[data-difficulty="hard"].active {
-    background: linear-gradient(to bottom, #F44336, #D32F2F);
-}
-
-.difficulty-info {
-    font-size: 0.85em;
-    color: #666;
-    text-align: center;
-    margin-top: 10px;
-}
-
-.easy-info, .normal-info, .hard-info {
-    margin: 5px 0;
-}
-
-/* İstatistik göstergeleri ile ilgili tüm stiller kaldırıldı */
-/* 
-.stats-display {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 10px;
-    background: rgba(248, 249, 250, 0.95);
-    padding: 8px 16px;
-    border-radius: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-    backdrop-filter: blur(5px);
-    font-weight: bold;
-}
-
-.stats-display .stat-item {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.stats-display .stat-icon {
-    font-size: 1.2em;
-    width: 25px;
-    height: 25px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-}
-
-.stats-display .stat-icon.correct {
-    color: #4CAF50;
-    background-color: rgba(76, 175, 80, 0.2);
-}
-
-.stats-display .stat-icon.wrong {
-    color: #F44336;
-    background-color: rgba(244, 67, 54, 0.2);
-}
-
-.stats-display .stat-icon.pass {
-    color: #FFC107;
-    background-color: rgba(255, 193, 7, 0.2);
-}
-
-.stats-display .stat-value {
-    font-weight: bold;
-    color: #333;
-}
-*/
-
-.stats-display, .stats-display .stat-item, .stats-display .stat-icon, .stats-display .stat-icon.correct, .stats-display .stat-icon.wrong, .stats-display .stat-icon.pass, .stats-display .stat-value {
-    display: none;
-}
-
-/* Sol menü veya navigasyon panelini gizlemek için */
-.side-menu, .side-navigation, .nav-menu, nav, .sidebar, aside {
-    display: none !important;
-    visibility: hidden !important;
-    opacity: 0 !important;
-    width: 0 !important;
-    height: 0 !important;
-    overflow: hidden !important;
-    position: absolute !important;
-    left: -9999px !important;
-}
+/* Bu satırdan sonraki eski responsive kodlar silinebilir çünkü yukarıda ekledim */   
