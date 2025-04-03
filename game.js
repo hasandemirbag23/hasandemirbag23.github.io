@@ -29,7 +29,7 @@ const branchNames = {
 
 const difficultySettings = {
     easy: {
-        time: 90,
+        time: 120,
         points: {
             correct: 1,
             wrong: -1,
@@ -37,7 +37,7 @@ const difficultySettings = {
         }
     },
     normal: {
-        time: 60,
+        time: 90,
         points: {
             correct: 1,
             wrong: -1,
@@ -45,7 +45,7 @@ const difficultySettings = {
         }
     },
     hard: {
-        time: 45,
+        time: 60,
         points: {
             correct: 2,
             wrong: -2,
@@ -1653,6 +1653,19 @@ document.addEventListener('DOMContentLoaded', () => {
     if (lastTeam1Name) document.getElementById('team1-name').value = lastTeam1Name;
     if (lastTeam2Name) document.getElementById('team2-name').value = lastTeam2Name;
 
+    // Zorluk seviyesi değiştiğinde ilgili detay kutusunu göster
+    const difficultyRadios = document.getElementsByName('difficulty');
+    
+    // İlk yükleme için varsayılan zorluk seviyesini seç
+    updateDifficultyDetails('normal');
+    
+    // Radio butonları değiştiğinde detay kutularını güncelle
+    difficultyRadios.forEach(radio => {
+        radio.addEventListener('change', function() {
+            updateDifficultyDetails(this.value);
+        });
+    });
+
     difficulty = selectedDifficulty;
     timeLeft = difficultySettings[difficulty].time;
     
@@ -1670,6 +1683,19 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('start-game-btn').addEventListener('click', () => {
         team1Name = document.getElementById('team1-name').value || "Takım 1";
         team2Name = document.getElementById('team2-name').value || "Takım 2";
+        
+        // Zorluk seviyesini al
+        const difficultyRadios = document.getElementsByName('difficulty');
+        for (let i = 0; i < difficultyRadios.length; i++) {
+            if (difficultyRadios[i].checked) {
+                difficulty = difficultyRadios[i].value;
+                break;
+            }
+        }
+        
+        // Zorluk seviyesine göre süreyi ayarla
+        timeLeft = difficultySettings[difficulty].time;
+        document.getElementById('timer').textContent = timeLeft;
         
         // Takım isimlerini kaydet
         localStorage.setItem('lastTeam1Name', team1Name);
@@ -1771,7 +1797,37 @@ function startTimer() {
                 document.getElementById('team1-pass').textContent = team1Stats.pass;
                 
                 modal.style.display = 'block';
-                document.getElementById('start-next-turn').onclick = startNextTurn;
+                document.getElementById('start-next-turn').addEventListener('click', () => {
+                    // Geçiş modalını kapat
+                    document.getElementById('team-transition-modal').style.display = 'none';
+                    
+                    // İkinci takım için yeni oyun parametrelerini ayarla
+                    isFirstTurn = false;
+                    currentTeam = 2;
+                    currentQuestionIndex = 0;
+                    passCount = 3;
+                    document.getElementById('pass-count').textContent = passCount;
+                    document.getElementById('pass-btn').disabled = false;
+                    
+                    // Soruları yeniden karıştır
+                    for (let i = questions.length - 1; i > 0; i--) {
+                        const j = Math.floor(Math.random() * (i + 1));
+                        [questions[i], questions[j]] = [questions[j], questions[i]];
+                    }
+                    
+                    // Süreyi seçilen zorluk seviyesine göre ayarla
+                    timeLeft = difficultySettings[difficulty].time;
+                    document.getElementById('timer').textContent = timeLeft;
+                    
+                    // Aktif takımı güncelle
+                    document.getElementById('current-team').innerHTML = 
+                        `<span class="current-team team2">${team2Name} (2. Tur)</span>`;
+                    
+                    // Oyunu başlat
+                    gameActive = true;
+                    showQuestion();
+                    startTimer();
+                });
             } else {
                 endGame();
             }
@@ -1976,4 +2032,19 @@ function startNextTurn() {
     gameActive = true;
     showQuestion();
     startTimer();
+}
+
+// Zorluk seviyesi detaylarını güncelleme fonksiyonu
+function updateDifficultyDetails(difficultyLevel) {
+    // Tüm detay kutularını gizle
+    const allDetailBoxes = document.querySelectorAll('.difficulty-details');
+    allDetailBoxes.forEach(box => {
+        box.classList.remove('active');
+    });
+    
+    // Seçilen zorluk seviyesinin detay kutusunu göster
+    const selectedBox = document.querySelector(`.${difficultyLevel}-details`);
+    if (selectedBox) {
+        selectedBox.classList.add('active');
+    }
 } 
