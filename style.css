@@ -494,6 +494,20 @@ h2 {
     #tabu-list li::before {
         margin-right: 10px;
     }
+
+    .difficulty-options {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .difficulty-info {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .difficulty-details {
+        max-width: 100%;
+    }
 }
 
 @media (max-width: 480px) {
@@ -811,36 +825,199 @@ h2 {
 }
 
 .difficulty-select {
-    margin-bottom: 2rem;
+    margin: 20px 0;
     text-align: center;
+    padding: 15px;
+    background-color: rgba(248, 249, 250, 0.7);
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
 }
 
-.difficulty-buttons {
+.difficulty-select h3 {
+    margin-bottom: 15px;
+    color: #2c3e50;
+    font-size: 1.5em;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.difficulty-options {
     display: flex;
     justify-content: center;
-    gap: 1rem;
-    margin-top: 1rem;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
 }
 
-.difficulty-btn {
-    padding: 0.5rem 1.5rem;
-    font-size: 1.1rem;
-    border: none;
-    border-radius: 5px;
+.difficulty-option {
+    display: flex;
+    align-items: center;
     cursor: pointer;
+    padding: 12px 20px;
+    border-radius: 10px;
+    border: 2px solid #e0e0e0;
     transition: all 0.3s ease;
-    background: linear-gradient(135deg, #6e8efb, #a777e3);
-    color: white;
+    background: rgba(255, 255, 255, 0.8);
+    min-width: 150px;
+    justify-content: center;
+    position: relative;
+    z-index: 10;
 }
 
-.difficulty-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+.difficulty-option:hover {
+    background: rgba(255, 255, 255, 0.9);
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
 
-.difficulty-btn.active {
-    background: linear-gradient(135deg, #4CAF50, #45a049);
-    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+.difficulty-option input {
+    margin-right: 10px;
+}
+
+.difficulty-option[for="easy-difficulty"] {
+    border-color: #4CAF50;
+}
+
+.difficulty-option[for="easy-difficulty"]:hover {
+    border-color: #4CAF50;
+    background: rgba(76, 175, 80, 0.1);
+}
+
+.difficulty-option[for="normal-difficulty"] {
+    border-color: #2196F3;
+}
+
+.difficulty-option[for="normal-difficulty"]:hover {
+    border-color: #2196F3;
+    background: rgba(33, 150, 243, 0.1);
+}
+
+.difficulty-option[for="hard-difficulty"] {
+    border-color: #F44336;
+}
+
+.difficulty-option[for="hard-difficulty"]:hover {
+    border-color: #F44336;
+    background: rgba(244, 67, 54, 0.1);
+}
+
+.difficulty-option input:checked + .difficulty-label.easy-label {
+    font-weight: bold;
+    color: #4CAF50;
+}
+
+.difficulty-option input:checked + .difficulty-label.normal-label {
+    font-weight: bold;
+    color: #2196F3;
+}
+
+.difficulty-option input:checked + .difficulty-label.hard-label {
+    font-weight: bold;
+    color: #F44336;
+}
+
+.difficulty-label {
+    font-size: 1.2em;
+    user-select: none;
+    transition: all 0.3s ease;
+}
+
+/* Zorluk Detayları */
+.difficulty-info {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 15px;
+    flex-wrap: wrap;
+}
+
+.difficulty-details {
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+    width: 100%;
+    max-width: 200px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    opacity: 0.6;
+    transform: scale(0.95);
+    transition: all 0.3s ease;
+    display: none;
+    border-left: 4px solid transparent;
+}
+
+.difficulty-details.active {
+    opacity: 1;
+    transform: scale(1);
+    display: block;
+    animation: fadeIn 0.5s ease;
+}
+
+.difficulty-details h4 {
+    margin-bottom: 10px;
+    font-size: 1.2em;
+    color: #2c3e50;
+    position: relative;
+    padding-bottom: 8px;
+}
+
+.difficulty-details h4:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: #f0f0f0;
+}
+
+.difficulty-details p {
+    margin: 8px 0;
+    font-size: 1em;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.difficulty-icon {
+    margin-right: 8px;
+    font-style: normal;
+}
+
+.easy-details {
+    border-left-color: #4CAF50;
+}
+
+.easy-details h4 {
+    color: #4CAF50;
+}
+
+.easy-details h4:after {
+    background: linear-gradient(to right, #4CAF50, transparent);
+}
+
+.normal-details {
+    border-left-color: #2196F3;
+}
+
+.normal-details h4 {
+    color: #2196F3;
+}
+
+.normal-details h4:after {
+    background: linear-gradient(to right, #2196F3, transparent);
+}
+
+.hard-details {
+    border-left-color: #F44336;
+}
+
+.hard-details h4 {
+    color: #F44336;
+}
+
+.hard-details h4:after {
+    background: linear-gradient(to right, #F44336, transparent);
 }
 
 /* PWA için özel stiller */
