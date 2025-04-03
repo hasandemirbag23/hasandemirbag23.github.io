@@ -4,8 +4,10 @@ let team2Score = 0;
 let currentTeam = 1;
 let passCount = 3;
 let currentQuestionIndex = 0;
+let usedQuestionIndices = []; // Kullanılan soruların indekslerini tutan dizi
+let unusedQuestions = []; // Henüz kullanılmamış soruların indeksleri
 let questions = [];
-let timeLeft = 60;
+let timeLeft = 90;
 let timerInterval;
 let gameActive = false;
 let isFirstTurn = true;
@@ -29,7 +31,7 @@ const branchNames = {
 
 const difficultySettings = {
     easy: {
-        time: 90,
+        time: 120,
         points: {
             correct: 1,
             wrong: -1,
@@ -37,7 +39,7 @@ const difficultySettings = {
         }
     },
     normal: {
-        time: 60,
+        time: 90,
         points: {
             correct: 1,
             wrong: -1,
@@ -45,7 +47,7 @@ const difficultySettings = {
         }
     },
     hard: {
-        time: 45,
+        time: 60,
         points: {
             correct: 2,
             wrong: -2,
@@ -1344,6 +1346,296 @@ const allQuestions = {
         {
             mainWord: "Stephen Hawking",
             tabuWords: ["Fizikçi", "Kara Delik", "Tekerlekli Sandalye", "Evren", "Zaman"]
+        },
+        
+        // Yeni eklenen kelimeler
+        {
+            mainWord: "Hititler",
+            tabuWords: ["Anadolu", "Uygarlık", "Antik", "Hattuşa", "Kral"]
+        },
+        {
+            mainWord: "Truva",
+            tabuWords: ["Savaş", "At", "Çanakkale", "Helen", "Troya"]
+        },
+        {
+            mainWord: "Ayasofya",
+            tabuWords: ["Cami", "Müze", "Bizans", "Kubbe", "İstanbul"]
+        },
+        {
+            mainWord: "Çanakkale",
+            tabuWords: ["Savaş", "Boğaz", "Gelibolu", "Şehit", "Zafer"]
+        },
+        {
+            mainWord: "Bizans",
+            tabuWords: ["İmparatorluk", "Konstantinopolis", "Doğu Roma", "İstanbul", "Ortodoks"]
+        },
+        {
+            mainWord: "Fatih Sultan Mehmet",
+            tabuWords: ["İstanbul", "Fetih", "Padişah", "1453", "Osmanlı"]
+        },
+        {
+            mainWord: "Yavuz Sultan Selim",
+            tabuWords: ["Padişah", "Osmanlı", "Mısır", "Hilafet", "İran"]
+        },
+        {
+            mainWord: "Kanuni Sultan Süleyman",
+            tabuWords: ["Padişah", "Muhteşem", "Osmanlı", "Hürrem", "Kanun"]
+        },
+        {
+            mainWord: "Anayasa",
+            tabuWords: ["Yasa", "Hukuk", "Meclis", "Madde", "Kanun"]
+        },
+        {
+            mainWord: "Harita",
+            tabuWords: ["Yer", "Konum", "Coğrafya", "Ülke", "Atlas"]
+        },
+        {
+            mainWord: "Kıta",
+            tabuWords: ["Asya", "Avrupa", "Afrika", "Amerika", "Kara"]
+        },
+        {
+            mainWord: "Asya",
+            tabuWords: ["Kıta", "Çin", "Hindistan", "Büyük", "Doğu"]
+        },
+        {
+            mainWord: "Avrupa",
+            tabuWords: ["Kıta", "Batı", "Fransa", "Almanya", "Birlik"]
+        },
+        {
+            mainWord: "Afrika",
+            tabuWords: ["Kıta", "Sahra", "Piramit", "Safari", "Sıcak"]
+        },
+        {
+            mainWord: "Amerika",
+            tabuWords: ["Kıta", "ABD", "Kuzey", "Güney", "Kolomb"]
+        },
+        {
+            mainWord: "Ekvator",
+            tabuWords: ["Çizgi", "Dünya", "Orta", "Sıcak", "Derece"]
+        },
+        {
+            mainWord: "Kutup",
+            tabuWords: ["Kuzey", "Güney", "Buz", "Soğuk", "Ayı"]
+        },
+        {
+            mainWord: "Okyanus",
+            tabuWords: ["Su", "Deniz", "Dalga", "Atlas", "Pasifik"]
+        },
+        {
+            mainWord: "Akdeniz",
+            tabuWords: ["Deniz", "Mavi", "Tatil", "Antalya", "Yunanistan"]
+        },
+        {
+            mainWord: "Karadeniz",
+            tabuWords: ["Deniz", "Kuzey", "Trabzon", "Fındık", "Balık"]
+        },
+        {
+            mainWord: "Marmara",
+            tabuWords: ["Deniz", "İstanbul", "Boğaz", "Küçük", "Adalar"]
+        },
+        {
+            mainWord: "Ege",
+            tabuWords: ["Deniz", "İzmir", "Zeytin", "Yunanistan", "Tatil"]
+        },
+        {
+            mainWord: "Van Gölü",
+            tabuWords: ["Göl", "Doğu", "Van", "Tatvan", "Sodalı"]
+        },
+        {
+            mainWord: "Ağrı Dağı",
+            tabuWords: ["Dağ", "Yüksek", "Nuh", "Gemi", "Doğu"]
+        },
+        {
+            mainWord: "Mezopotamya",
+            tabuWords: ["Dicle", "Fırat", "Nehir", "Uygarlık", "Bereketli"]
+        },
+        {
+            mainWord: "Maraton",
+            tabuWords: ["Koşu", "Yarış", "42", "Kilometre", "Yunan"]
+        },
+        {
+            mainWord: "Atletizm",
+            tabuWords: ["Koşu", "Atlama", "Yarış", "Spor", "Pist"]
+        },
+        {
+            mainWord: "Futbol",
+            tabuWords: ["Top", "Maç", "Kaleci", "Gol", "Takım"]
+        },
+        {
+            mainWord: "Basketbol",
+            tabuWords: ["Top", "Pota", "Maç", "Sayı", "NBA"]
+        },
+        {
+            mainWord: "Voleybol",
+            tabuWords: ["Top", "File", "Maç", "Servis", "Smaç"]
+        },
+        {
+            mainWord: "Tenis",
+            tabuWords: ["Raket", "Top", "Kort", "Set", "Servis"]
+        },
+        {
+            mainWord: "Yüzme",
+            tabuWords: ["Su", "Havuz", "Sporcu", "Stil", "Yarış"]
+        },
+        {
+            mainWord: "Güreş",
+            tabuWords: ["Sporcu", "Mindere", "Yağlı", "Pehilvan", "Minder"]
+        },
+        {
+            mainWord: "Satranç",
+            tabuWords: ["Oyun", "Taş", "Şah", "Vezir", "Mat"]
+        },
+        {
+            mainWord: "Kayak",
+            tabuWords: ["Kar", "Dağ", "Spor", "Pist", "Kış"]
+        },
+        {
+            mainWord: "Buz Pateni",
+            tabuWords: ["Buz", "Paten", "Kış", "Dans", "Spor"]
+        },
+        {
+            mainWord: "Bisiklet",
+            tabuWords: ["Pedal", "Tekerlek", "Yarış", "Tur", "Spor"]
+        },
+        {
+            mainWord: "Halter",
+            tabuWords: ["Ağırlık", "Kaldırma", "Sporcu", "Kilo", "Olimpiyat"]
+        },
+        {
+            mainWord: "Formula 1",
+            tabuWords: ["Yarış", "Araba", "Pist", "Pilot", "Hız"]
+        },
+        {
+            mainWord: "Dünya Kupası",
+            tabuWords: ["Futbol", "Turnuva", "Kupa", "Ülke", "Milli"]
+        },
+        {
+            mainWord: "Şampiyonlar Ligi",
+            tabuWords: ["Futbol", "Turnuva", "Kupa", "Avrupa", "Final"]
+        },
+        {
+            mainWord: "Tour de France",
+            tabuWords: ["Bisiklet", "Yarış", "Fransa", "Sarı", "Tırmanış"]
+        },
+        {
+            mainWord: "NBA",
+            tabuWords: ["Basketbol", "Amerika", "Takım", "Lig", "Oyuncu"]
+        },
+        {
+            mainWord: "FIFA",
+            tabuWords: ["Futbol", "Federasyon", "Dünya", "Kupası", "Organizasyon"]
+        },
+        {
+            mainWord: "UEFA",
+            tabuWords: ["Futbol", "Avrupa", "Federasyon", "Turnuva", "Şampiyona"]
+        },
+        {
+            mainWord: "Wimbledon",
+            tabuWords: ["Tenis", "Turnuva", "Londra", "Çim", "Kort"]
+        },
+        {
+            mainWord: "Ekosistem",
+            tabuWords: ["Canlı", "Doğa", "Çevre", "Denge", "Yaşam"]
+        },
+        {
+            mainWord: "Atmosfer",
+            tabuWords: ["Hava", "Gaz", "Oksijen", "Dünya", "Ozon"]
+        },
+        {
+            mainWord: "Küresel Isınma",
+            tabuWords: ["İklim", "Çevre", "Sıcaklık", "Sera", "Dünya"]
+        },
+        {
+            mainWord: "Sera Gazı",
+            tabuWords: ["Karbon", "İklim", "Atmosfer", "Isınma", "Emisyon"]
+        },
+        {
+            mainWord: "Deprem",
+            tabuWords: ["Yer", "Sarsıntı", "Fay", "Yıkım", "Şiddet"]
+        },
+        {
+            mainWord: "Tsunami",
+            tabuWords: ["Dalga", "Deprem", "Deniz", "Felaket", "Yıkım"]
+        },
+        {
+            mainWord: "Hortum",
+            tabuWords: ["Rüzgar", "Kasırga", "Fırtına", "Dönen", "Afet"]
+        },
+        {
+            mainWord: "Kasırga",
+            tabuWords: ["Fırtına", "Rüzgar", "Tropik", "Yıkım", "Okyanus"]
+        },
+        {
+            mainWord: "Yanardağ",
+            tabuWords: ["Volkan", "Lav", "Püskürme", "Dağ", "Magma"]
+        },
+        {
+            mainWord: "Buzul",
+            tabuWords: ["Buz", "Erime", "Kutup", "Soğuk", "İklim"]
+        },
+        {
+            mainWord: "Mercan",
+            tabuWords: ["Deniz", "Resif", "Canlı", "Koloni", "Renkli"]
+        },
+        {
+            mainWord: "Kutup Ayısı",
+            tabuWords: ["Kuzey", "Buz", "Beyaz", "Hayvan", "Soğuk"]
+        },
+        {
+            mainWord: "Penguen",
+            tabuWords: ["Kuş", "Kutup", "Buz", "Yüzen", "Siyah"]
+        },
+        {
+            mainWord: "Yunus",
+            tabuWords: ["Deniz", "Memeli", "Akıllı", "Gösteri", "Balık"]
+        },
+        {
+            mainWord: "Balina",
+            tabuWords: ["Deniz", "Büyük", "Memeli", "Yunus", "Okyanus"]
+        },
+        {
+            mainWord: "Panda",
+            tabuWords: ["Çin", "Bamboo", "Siyah", "Beyaz", "Ayı"]
+        },
+        {
+            mainWord: "Jaguar",
+            tabuWords: ["Kedi", "Leopar", "Vahşi", "Benekli", "Orman"]
+        },
+        {
+            mainWord: "Leopar",
+            tabuWords: ["Kedi", "Benekli", "Afrika", "Vahşi", "Aslan"]
+        },
+        {
+            mainWord: "Ağaç",
+            tabuWords: ["Odun", "Orman", "Yaprak", "Kök", "Gövde"]
+        },
+        {
+            mainWord: "Orman",
+            tabuWords: ["Ağaç", "Yeşil", "Amazon", "Doğa", "Vahşi"]
+        },
+        {
+            mainWord: "Çöl",
+            tabuWords: ["Kum", "Sıcak", "Sahra", "Kurak", "Vaha"]
+        },
+        {
+            mainWord: "Savana",
+            tabuWords: ["Afrika", "Otlak", "Aslan", "Zebra", "Ekosistem"]
+        },
+        {
+            mainWord: "Tundra",
+            tabuWords: ["Soğuk", "Kutup", "Ekosistem", "Kuzey", "Donmuş"]
+        },
+        {
+            mainWord: "Tropikal",
+            tabuWords: ["Sıcak", "Nemli", "Orman", "Ekvatır", "Yağmur"]
+        },
+        {
+            mainWord: "Muson",
+            tabuWords: ["Yağmur", "Mevsim", "Asya", "Hindistan", "Rüzgar"]
+        },
+        {
+            mainWord: "Amazon Nehri",
+            tabuWords: ["Güney Amerika", "Su", "Orman", "Brezilya", "Nehir"]
         }
     ]
 };
@@ -1363,17 +1655,31 @@ document.addEventListener('DOMContentLoaded', () => {
     if (lastTeam1Name) document.getElementById('team1-name').value = lastTeam1Name;
     if (lastTeam2Name) document.getElementById('team2-name').value = lastTeam2Name;
 
+    // Zorluk seviyesi butonlarına CSS sınıfları ekleyelim
+    const difficultyButtons = document.querySelectorAll('.difficulty-btn');
+    difficultyButtons.forEach(button => {
+        if (button.dataset.difficulty === selectedDifficulty) {
+            button.classList.add('active');
+        }
+        
+        button.addEventListener('click', () => {
+            difficultyButtons.forEach(btn => btn.classList.remove('active'));
+            button.classList.add('active');
+            difficulty = button.dataset.difficulty;
+            localStorage.setItem('difficulty', difficulty);
+            timeLeft = difficultySettings[difficulty].time;
+            document.getElementById('timer').textContent = timeLeft;
+        });
+    });
+
     difficulty = selectedDifficulty;
     timeLeft = difficultySettings[difficulty].time;
     
     document.getElementById('branch-title').textContent = branchNames[selectedBranch];
     questions = allQuestions[selectedBranch];
     
-    // Soruları karıştır
-    for (let i = questions.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [questions[i], questions[j]] = [questions[j], questions[i]];
-    }
+    // Kullanılmamış soruları başlat
+    resetUnusedQuestions();
     
     // Takım isimlerini alma
     document.getElementById('team-name-modal').style.display = 'flex';
@@ -1384,6 +1690,10 @@ document.addEventListener('DOMContentLoaded', () => {
         // Takım isimlerini kaydet
         localStorage.setItem('lastTeam1Name', team1Name);
         localStorage.setItem('lastTeam2Name', team2Name);
+        
+        // İstatistikleri sıfırla
+        team1Stats = { correct: 0, wrong: 0, pass: 0 };
+        team2Stats = { correct: 0, wrong: 0, pass: 0 };
         
         document.getElementById('team-name-modal').style.display = 'none';
         document.getElementById('score').textContent = `${team1Name}: 0 | ${team2Name}: 0`;
@@ -1397,7 +1707,20 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function showQuestion() {
-    if (!gameActive || currentQuestionIndex >= questions.length) return;
+    if (!gameActive) return;
+    
+    // Eğer kullanılmamış sorular tükenmişse, soruları sıfırla
+    if (unusedQuestions.length === 0) {
+        resetUnusedQuestions();
+    }
+    
+    // Kullanılmamış sorulardan rastgele bir soru indeksi seç
+    const randomIndex = Math.floor(Math.random() * unusedQuestions.length);
+    currentQuestionIndex = unusedQuestions[randomIndex];
+    
+    // Kullanılan soruyu listeden çıkar
+    unusedQuestions.splice(randomIndex, 1);
+    usedQuestionIndices.push(currentQuestionIndex);
     
     const question = questions[currentQuestionIndex];
     document.getElementById('main-word').textContent = question.mainWord;
@@ -1435,21 +1758,20 @@ function updateScore(points) {
     document.getElementById('current-team').innerHTML = 
         `<span class="current-team team${currentTeam}">${teamText} (${isFirstTurn ? "1. Tur" : "2. Tur"})</span>`;
     
+    // Pas hakkını güncelle
     document.getElementById('pass-count').textContent = passCount;
     
     if (points === 0) {
         if (passCount > 0) {
             passCount--;
             document.getElementById('pass-count').textContent = passCount;
-            currentQuestionIndex++;
-            showQuestion();
+            showQuestion(); // Yeni soru göster
         }
         if (passCount === 0) {
             document.getElementById('pass-btn').disabled = true;
         }
     } else {
-        currentQuestionIndex++;
-        showQuestion();
+        showQuestion(); // Yeni soru göster
     }
     saveScore();
 }
@@ -1490,124 +1812,215 @@ function startTimer() {
 }
 
 function endGame() {
-    gameActive = false;
     clearInterval(timerInterval);
+    gameActive = false;
+
+    let team1FinalScore = team1Score;
+    let team2FinalScore = team2Score;
+    let totalScore = team1FinalScore + team2FinalScore;
     
-    const finalScore = document.getElementById('final-score');
-    const winner = team1Score > team2Score ? team1Name : 
-                  team2Score > team1Score ? team2Name : "Berabere";
-    
-    finalScore.innerHTML = `
-        <div class="team-stats">
-            <p><span class="team1-color">${team1Name}: ${team1Score} puan</span></p>
+    // HTML içeriğini oluştur
+    let finalScoreHTML = `
+        <div class="team-stats" style="background: linear-gradient(145deg, rgba(76, 175, 80, 0.6), rgba(76, 175, 80, 0.3));">
+            <p>${team1Name}</p>
             <div class="stats-grid">
                 <div class="stat-item">
-                    <span class="stat-label">Doğru:</span>
-                    <span class="stat-value">${team1Stats.correct}</span>
+                    <span class="stat-label">Doğru</span>
+                    <span id="team1-correct" class="stat-value">${team1Stats.correct}</span>
                 </div>
                 <div class="stat-item">
-                    <span class="stat-label">Yanlış:</span>
-                    <span class="stat-value">${team1Stats.wrong}</span>
+                    <span class="stat-label">Yanlış</span>
+                    <span id="team1-wrong" class="stat-value">${team1Stats.wrong}</span>
                 </div>
                 <div class="stat-item">
-                    <span class="stat-label">Pas:</span>
-                    <span class="stat-value">${team1Stats.pass}</span>
+                    <span class="stat-label">Pas</span>
+                    <span id="team1-pass" class="stat-value">${team1Stats.pass}</span>
+                </div>
+                <div class="stat-item" style="grid-column: span 3;">
+                    <span class="stat-label">Toplam Puan</span>
+                    <span class="stat-value" style="color: #4CAF50;">${team1FinalScore}</span>
                 </div>
             </div>
         </div>
-        <div class="team-stats">
-            <p><span class="team2-color">${team2Name}: ${team2Score} puan</span></p>
+        <div class="team-stats" style="background: linear-gradient(145deg, rgba(33, 150, 243, 0.6), rgba(33, 150, 243, 0.3));">
+            <p>${team2Name}</p>
             <div class="stats-grid">
                 <div class="stat-item">
-                    <span class="stat-label">Doğru:</span>
-                    <span class="stat-value">${team2Stats.correct}</span>
+                    <span class="stat-label">Doğru</span>
+                    <span id="team2-correct" class="stat-value">${team2Stats.correct}</span>
                 </div>
                 <div class="stat-item">
-                    <span class="stat-label">Yanlış:</span>
-                    <span class="stat-value">${team2Stats.wrong}</span>
+                    <span class="stat-label">Yanlış</span>
+                    <span id="team2-wrong" class="stat-value">${team2Stats.wrong}</span>
                 </div>
                 <div class="stat-item">
-                    <span class="stat-label">Pas:</span>
-                    <span class="stat-value">${team2Stats.pass}</span>
+                    <span class="stat-label">Pas</span>
+                    <span id="team2-pass" class="stat-value">${team2Stats.pass}</span>
+                </div>
+                <div class="stat-item" style="grid-column: span 3;">
+                    <span class="stat-label">Toplam Puan</span>
+                    <span class="stat-value" style="color: #2196F3;">${team2FinalScore}</span>
+                </div>
+            </div>
+        </div>
+        <div class="team-stats" style="background: linear-gradient(145deg, rgba(156, 39, 176, 0.6), rgba(156, 39, 176, 0.3));">
+            <p>Genel Sonuç</p>
+            <div class="stats-grid">
+                <div class="stat-item" style="grid-column: span 3;">
+                    <span class="stat-label">Toplam Puan</span>
+                    <span class="stat-value" style="color: #9C27B0;">${totalScore}</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Kazanan</span>
+                    <span class="stat-value" style="color: ${team1FinalScore > team2FinalScore ? '#4CAF50' : (team1FinalScore < team2FinalScore ? '#2196F3' : '#FFC107')};">
+                        ${team1FinalScore > team2FinalScore ? team1Name : (team1FinalScore < team2FinalScore ? team2Name : 'Berabere')}
+                    </span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Zorluk</span>
+                    <span class="stat-value" style="color: ${currentDifficulty === 'easy' ? '#4CAF50' : (currentDifficulty === 'normal' ? '#2196F3' : '#F44336')};">
+                        ${currentDifficulty === 'easy' ? 'Kolay' : (currentDifficulty === 'normal' ? 'Normal' : 'Zor')}
+                    </span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Branş</span>
+                    <span class="stat-value">${branchNames[currentBranch]}</span>
                 </div>
             </div>
         </div>
     `;
     
-    document.querySelector('.modal-content h2').textContent = `Oyun Bitti! Kazanan: ${winner}`;
-    document.getElementById('score-modal').style.display = 'flex';
+    document.getElementById('final-score').innerHTML = finalScoreHTML;
+    document.getElementById('final-score-value').textContent = totalScore;
     
-    saveScore();
+    saveScore(totalScore);
     showHighScores();
+    
+    document.getElementById('score-modal').style.display = 'flex';
 }
 
-function saveScore() {
-    const selectedBranch = localStorage.getItem('selectedBranch');
-    let highScores = JSON.parse(localStorage.getItem('highScores') || '{}');
-    let gameHistory = JSON.parse(localStorage.getItem('gameHistory') || '[]');
+function saveScore(score) {
+    let date = new Date();
+    let scoreDate = `${date.getDate()}.${date.getMonth() + 1}.${date.getFullYear()} ${date.getHours()}:${date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes()}`;
     
-    if (!highScores[selectedBranch]) {
-        highScores[selectedBranch] = [];
-    }
+    // Yüksek puan kaydetme
+    let highScores = JSON.parse(localStorage.getItem('tabuHighScores') || '[]');
     
-    const newScore = {
-        team1Score: team1Score,
-        team2Score: team2Score,
-        date: new Date().toLocaleDateString(),
-        time: new Date().toLocaleTimeString()
-    };
-    
-    highScores[selectedBranch].push(newScore);
-    highScores[selectedBranch].sort((a, b) => (b.team1Score + b.team2Score) - (a.team1Score + a.team2Score));
-    highScores[selectedBranch] = highScores[selectedBranch].slice(0, 10);
-    
-    gameHistory.unshift({
-        branch: selectedBranch,
-        branchName: branchNames[selectedBranch],
-        team1Score: team1Score,
-        team2Score: team2Score,
-        date: new Date().toLocaleDateString(),
-        time: new Date().toLocaleTimeString(),
-        questions: questions.length
+    highScores.push({
+        score: score,
+        team1: {
+            name: team1Name,
+            score: team1Score,
+            stats: team1Stats
+        },
+        team2: {
+            name: team2Name,
+            score: team2Score,
+            stats: team2Stats
+        },
+        branch: branchNames[currentBranch],
+        difficulty: currentDifficulty,
+        date: scoreDate
     });
     
-    gameHistory = gameHistory.slice(0, 20);
+    // Puana göre sırala (yüksekten düşüğe)
+    highScores.sort((a, b) => b.score - a.score);
     
-    localStorage.setItem('highScores', JSON.stringify(highScores));
-    localStorage.setItem('gameHistory', JSON.stringify(gameHistory));
+    // Maksimum 10 skoru sakla
+    if (highScores.length > 10) {
+        highScores = highScores.slice(0, 10);
+    }
+    
+    localStorage.setItem('tabuHighScores', JSON.stringify(highScores));
+    
+    // Oyun geçmişi kaydetme
+    let gameHistory = JSON.parse(localStorage.getItem('tabuGameHistory') || '[]');
+    
+    gameHistory.unshift({
+        score: score,
+        team1: {
+            name: team1Name,
+            score: team1Score,
+            stats: team1Stats
+        },
+        team2: {
+            name: team2Name,
+            score: team2Score,
+            stats: team2Stats
+        },
+        branch: branchNames[currentBranch],
+        difficulty: currentDifficulty,
+        date: scoreDate
+    });
+    
+    // Maksimum 10 oyun geçmişi sakla
+    if (gameHistory.length > 10) {
+        gameHistory = gameHistory.slice(0, 10);
+    }
+    
+    localStorage.setItem('tabuGameHistory', JSON.stringify(gameHistory));
 }
 
 function showHighScores() {
-    const selectedBranch = localStorage.getItem('selectedBranch');
-    const highScores = JSON.parse(localStorage.getItem('highScores') || '{}');
-    const gameHistory = JSON.parse(localStorage.getItem('gameHistory') || '[]');
-    const scoresList = document.getElementById('high-scores-list');
-    const historyList = document.getElementById('game-history-list');
+    const highScoresList = document.getElementById('high-scores-list');
+    const gameHistoryList = document.getElementById('game-history-list');
     
-    scoresList.innerHTML = '';
-    if (highScores[selectedBranch] && highScores[selectedBranch].length > 0) {
-        highScores[selectedBranch].forEach((score, index) => {
-            const li = document.createElement('li');
-            li.textContent = `${index + 1}. Takım 1: ${score.team1Score} | Takım 2: ${score.team2Score} (${score.date} ${score.time})`;
-            scoresList.appendChild(li);
-        });
+    // Yüksek skorları göster
+    let highScores = JSON.parse(localStorage.getItem('tabuHighScores') || '[]');
+    
+    highScoresList.innerHTML = '';
+    
+    if (highScores.length === 0) {
+        highScoresList.innerHTML = '<li>Henüz yüksek puan yok!</li>';
     } else {
-        const li = document.createElement('li');
-        li.textContent = 'Henüz skor yok';
-        scoresList.appendChild(li);
+        highScores.forEach((item, index) => {
+            let difficultyClass = item.difficulty === 'easy' ? 'easy' : (item.difficulty === 'normal' ? 'normal' : 'hard');
+            let difficultyText = item.difficulty === 'easy' ? 'Kolay' : (item.difficulty === 'normal' ? 'Normal' : 'Zor');
+            
+            highScoresList.innerHTML += `
+                <li>
+                    <strong>${index + 1}.</strong> ${item.score} puan - 
+                    ${item.team1.name}: ${item.team1.score}, 
+                    ${item.team2.name}: ${item.team2.score} | 
+                    <span class="${difficultyClass}">${difficultyText}</span> - 
+                    ${item.branch} - 
+                    ${item.date}
+                </li>
+            `;
+        });
     }
     
-    historyList.innerHTML = '';
-    if (gameHistory.length > 0) {
-        gameHistory.forEach(game => {
-            const li = document.createElement('li');
-            li.textContent = `${game.branchName}: Takım 1: ${game.team1Score} | Takım 2: ${game.team2Score} (${game.date} ${game.time})`;
-            historyList.appendChild(li);
-        });
+    // Oyun geçmişini göster
+    let gameHistory = JSON.parse(localStorage.getItem('tabuGameHistory') || '[]');
+    
+    gameHistoryList.innerHTML = '';
+    
+    if (gameHistory.length === 0) {
+        gameHistoryList.innerHTML = '<li>Henüz oyun geçmişi yok!</li>';
     } else {
-        const li = document.createElement('li');
-        li.textContent = 'Henüz oyun geçmişi yok';
-        historyList.appendChild(li);
+        gameHistory.forEach((item) => {
+            let difficultyClass = item.difficulty === 'easy' ? 'easy' : (item.difficulty === 'normal' ? 'normal' : 'hard');
+            let difficultyText = item.difficulty === 'easy' ? 'Kolay' : (item.difficulty === 'normal' ? 'Normal' : 'Zor');
+            let winner = item.team1.score > item.team2.score ? item.team1.name : (item.team1.score < item.team2.score ? item.team2.name : 'Berabere');
+            
+            gameHistoryList.innerHTML += `
+                <li>
+                    <strong>${winner}</strong> - ${item.score} puan | 
+                    <span class="${difficultyClass}">${difficultyText}</span> - 
+                    ${item.branch} - 
+                    ${item.date}
+                </li>
+            `;
+        });
+    }
+    
+    // Ayrı bir skor görüntüleme modalı için de aynı verileri hazırla
+    if (document.getElementById('high-scores-list-view')) {
+        const highScoresListView = document.getElementById('high-scores-list-view');
+        const gameHistoryListView = document.getElementById('game-history-list-view');
+        
+        highScoresListView.innerHTML = highScoresList.innerHTML;
+        gameHistoryListView.innerHTML = gameHistoryList.innerHTML;
     }
 }
 
@@ -1651,6 +2064,22 @@ function setupEventListeners() {
     document.getElementById('main-menu').addEventListener('click', () => {
         window.location.href = 'index.html';
     });
+    
+    // Skor modalı kapama butonu
+    if (document.getElementById('close-scores-btn')) {
+        document.getElementById('close-scores-btn').addEventListener('click', function() {
+            document.getElementById('scores-modal').style.display = 'none';
+        });
+    }
+    
+    // Header'daki skor linki
+    if (document.querySelector('.header-scores')) {
+        document.querySelector('.header-scores').addEventListener('click', function(e) {
+            e.preventDefault();
+            showHighScores(); // Skorları güncelle
+            document.getElementById('scores-modal').style.display = 'flex';
+        });
+    }
 }
 
 function startGame() {
@@ -1676,14 +2105,32 @@ function startNextTurn() {
         `<span class="current-team team2">${team2Name}</span>`;
     document.querySelector('.timer').classList.remove('warning');
     
-    // Soruları yeniden karıştır
-    for (let i = questions.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [questions[i], questions[j]] = [questions[j], questions[i]];
-    }
+    // 2. tur için soruları sıfırla
+    resetUnusedQuestions();
     
-    currentQuestionIndex = 0;
     gameActive = true;
     showQuestion();
     startTimer();
+}
+
+// Yeni fonksiyon: Kullanılmamış soruları sıfırlar
+function resetUnusedQuestions() {
+    unusedQuestions = [];
+    for (let i = 0; i < questions.length; i++) {
+        unusedQuestions.push(i);
+    }
+    // Eğer önceki turdan kullanılmış sorular varsa, onları çıkar
+    if (isFirstTurn === false && usedQuestionIndices.length > 0) {
+        // Son 10 soruyu tekrar gösterme (veya daha az soru kullanılmışsa tümünü)
+        const lastUsedCount = Math.min(10, usedQuestionIndices.length);
+        const recentlyUsed = usedQuestionIndices.slice(-lastUsedCount);
+        
+        unusedQuestions = unusedQuestions.filter(idx => !recentlyUsed.includes(idx));
+    }
+    
+    // Soruları karıştır
+    for (let i = unusedQuestions.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [unusedQuestions[i], unusedQuestions[j]] = [unusedQuestions[j], unusedQuestions[i]];
+    }
 } 
