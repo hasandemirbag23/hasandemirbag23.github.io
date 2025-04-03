@@ -15,19 +15,6 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header>
-        <div class="container">
-            <h1>Tabu Oyunu</h1>
-            <nav>
-                <ul>
-                    <li><a href="index.html">Ana Sayfa</a></li>
-                    <li><a href="#" class="header-scores">Skorlar</a></li>
-                    <li><a href="about.html">Hakkında</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
-
     <div class="container">
         <div class="game-header">
             <h1 id="branch-title"></h1>
@@ -56,51 +43,23 @@
     <div id="score-modal" class="modal">
         <div class="modal-content">
             <h2>Oyun Bitti!</h2>
-            <p>Toplam Puan: <span id="final-score-value">0</span></p>
-            
-            <div id="final-score"></div>
+            <p>Toplam Puan: <span id="final-score">0</span></p>
             
             <div class="scores-container">
                 <div class="high-scores">
-                    <h3>En Yüksek Puanlar</h3>
-                    <ul id="high-scores-list">
-                        <!-- Skorlar burada listelenecek -->
-                    </ul>
+                    <h3>Yüksek Puanlar</h3>
+                    <ul id="high-scores-list"></ul>
                 </div>
+                
                 <div class="game-history">
                     <h3>Son Oyunlar</h3>
-                    <ul id="game-history-list">
-                        <!-- Oyun geçmişi burada listelenecek -->
-                    </ul>
+                    <ul id="game-history-list"></ul>
                 </div>
             </div>
             
             <div class="modal-buttons">
                 <button class="modal-btn play-again-btn" onclick="location.reload()">Tekrar Oyna</button>
                 <button class="modal-btn home-btn" onclick="window.location.href='index.html'">Ana Sayfa</button>
-            </div>
-        </div>
-    </div>
-
-    <div id="scores-modal" class="modal">
-        <div class="modal-content">
-            <h2>Skorlar</h2>
-            <div class="scores-container">
-                <div class="high-scores">
-                    <h3>En Yüksek Puanlar</h3>
-                    <ul id="high-scores-list-view">
-                        <!-- Skorlar burada listelenecek -->
-                    </ul>
-                </div>
-                <div class="game-history">
-                    <h3>Son Oyunlar</h3>
-                    <ul id="game-history-list-view">
-                        <!-- Oyun geçmişi burada listelenecek -->
-                    </ul>
-                </div>
-            </div>
-            <div class="modal-buttons">
-                <button class="modal-btn home-btn" id="close-scores-btn">Kapat</button>
             </div>
         </div>
     </div>
@@ -118,21 +77,6 @@
                     <input type="text" id="team2-name" placeholder="2. Takım">
                 </div>
             </div>
-            
-            <div class="difficulty-selection">
-                <h3>Zorluk Seviyesi:</h3>
-                <div class="difficulty-buttons">
-                    <button class="difficulty-btn" data-difficulty="easy">Kolay</button>
-                    <button class="difficulty-btn" data-difficulty="normal">Normal</button>
-                    <button class="difficulty-btn" data-difficulty="hard">Zor</button>
-                </div>
-                <div class="difficulty-info">
-                    <p class="easy-info">Kolay: 120 saniye süre, +1 doğru / -1 yanlış / 0 pas</p>
-                    <p class="normal-info">Normal: 90 saniye süre, +1 doğru / -1 yanlış / 0 pas</p>
-                    <p class="hard-info">Zor: 60 saniye süre, +2 doğru / -2 yanlış / -1 pas</p>
-                </div>
-            </div>
-            
             <button id="start-game-btn">Oyunu Başlat</button>
         </div>
     </div>
