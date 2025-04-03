@@ -20,7 +20,7 @@
             <h1 id="branch-title"></h1>
             <div class="score-time">
                 <div class="score">Skor: <span id="score">0 - 0</span></div>
-                <div class="timer">Süre: <span id="timer">90</span></div>
+                <div class="timer">Süre: <span id="timer">60</span></div>
                 <div class="team">Sıra: <span id="current-team">-</span></div>
                 <div class="pass">Pas Hakkı: <span id="pass-count">3</span></div>
             </div>
@@ -77,6 +77,48 @@
                     <input type="text" id="team2-name" placeholder="2. Takım">
                 </div>
             </div>
+            
+            <div class="difficulty-select">
+                <h3>Zorluk Seviyesi</h3>
+                <div class="difficulty-options">
+                    <label class="difficulty-option" for="easy-difficulty">
+                        <input type="radio" name="difficulty" value="easy" id="easy-difficulty">
+                        <span class="difficulty-label easy-label">Kolay</span>
+                    </label>
+                    <label class="difficulty-option" for="normal-difficulty">
+                        <input type="radio" name="difficulty" value="normal" id="normal-difficulty" checked>
+                        <span class="difficulty-label normal-label">Normal</span>
+                    </label>
+                    <label class="difficulty-option" for="hard-difficulty">
+                        <input type="radio" name="difficulty" value="hard" id="hard-difficulty">
+                        <span class="difficulty-label hard-label">Zor</span>
+                    </label>
+                </div>
+                <div class="difficulty-info">
+                    <div class="difficulty-details easy-details">
+                        <h4>Kolay Mod</h4>
+                        <p><i class="difficulty-icon">⏱️</i> 120 saniye süre</p>
+                        <p><i class="difficulty-icon">✅</i> Doğru: +1 puan</p>
+                        <p><i class="difficulty-icon">❌</i> Yanlış: -1 puan</p>
+                        <p><i class="difficulty-icon">↪️</i> Pas: 0 puan</p>
+                    </div>
+                    <div class="difficulty-details normal-details active">
+                        <h4>Normal Mod</h4>
+                        <p><i class="difficulty-icon">⏱️</i> 90 saniye süre</p>
+                        <p><i class="difficulty-icon">✅</i> Doğru: +1 puan</p>
+                        <p><i class="difficulty-icon">❌</i> Yanlış: -1 puan</p>
+                        <p><i class="difficulty-icon">↪️</i> Pas: 0 puan</p>
+                    </div>
+                    <div class="difficulty-details hard-details">
+                        <h4>Zor Mod</h4>
+                        <p><i class="difficulty-icon">⏱️</i> 60 saniye süre</p>
+                        <p><i class="difficulty-icon">✅</i> Doğru: +2 puan</p>
+                        <p><i class="difficulty-icon">❌</i> Yanlış: -2 puan</p>
+                        <p><i class="difficulty-icon">↪️</i> Pas: -1 puan</p>
+                    </div>
+                </div>
+            </div>
+            
             <button id="start-game-btn">Oyunu Başlat</button>
         </div>
     </div>
