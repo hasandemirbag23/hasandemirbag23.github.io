@@ -1655,23 +1655,6 @@ document.addEventListener('DOMContentLoaded', () => {
     if (lastTeam1Name) document.getElementById('team1-name').value = lastTeam1Name;
     if (lastTeam2Name) document.getElementById('team2-name').value = lastTeam2Name;
 
-    // Zorluk seviyesi butonlarına CSS sınıfları ekleyelim
-    const difficultyButtons = document.querySelectorAll('.difficulty-btn');
-    difficultyButtons.forEach(button => {
-        if (button.dataset.difficulty === selectedDifficulty) {
-            button.classList.add('active');
-        }
-        
-        button.addEventListener('click', () => {
-            difficultyButtons.forEach(btn => btn.classList.remove('active'));
-            button.classList.add('active');
-            difficulty = button.dataset.difficulty;
-            localStorage.setItem('difficulty', difficulty);
-            timeLeft = difficultySettings[difficulty].time;
-            document.getElementById('timer').textContent = timeLeft;
-        });
-    });
-
     difficulty = selectedDifficulty;
     timeLeft = difficultySettings[difficulty].time;
     
@@ -1690,10 +1673,6 @@ document.addEventListener('DOMContentLoaded', () => {
         // Takım isimlerini kaydet
         localStorage.setItem('lastTeam1Name', team1Name);
         localStorage.setItem('lastTeam2Name', team2Name);
-        
-        // İstatistikleri sıfırla
-        team1Stats = { correct: 0, wrong: 0, pass: 0 };
-        team2Stats = { correct: 0, wrong: 0, pass: 0 };
         
         document.getElementById('team-name-modal').style.display = 'none';
         document.getElementById('score').textContent = `${team1Name}: 0 | ${team2Name}: 0`;
@@ -1758,7 +1737,6 @@ function updateScore(points) {
     document.getElementById('current-team').innerHTML = 
         `<span class="current-team team${currentTeam}">${teamText} (${isFirstTurn ? "1. Tur" : "2. Tur"})</span>`;
     
-    // Pas hakkını güncelle
     document.getElementById('pass-count').textContent = passCount;
     
     if (points === 0) {
@@ -1812,215 +1790,124 @@ function startTimer() {
 }
 
 function endGame() {
-    clearInterval(timerInterval);
     gameActive = false;
-
-    let team1FinalScore = team1Score;
-    let team2FinalScore = team2Score;
-    let totalScore = team1FinalScore + team2FinalScore;
+    clearInterval(timerInterval);
     
-    // HTML içeriğini oluştur
-    let finalScoreHTML = `
-        <div class="team-stats" style="background: linear-gradient(145deg, rgba(76, 175, 80, 0.6), rgba(76, 175, 80, 0.3));">
-            <p>${team1Name}</p>
+    const finalScore = document.getElementById('final-score');
+    const winner = team1Score > team2Score ? team1Name : 
+                  team2Score > team1Score ? team2Name : "Berabere";
+    
+    finalScore.innerHTML = `
+        <div class="team-stats">
+            <p><span class="team1-color">${team1Name}: ${team1Score} puan</span></p>
             <div class="stats-grid">
                 <div class="stat-item">
-                    <span class="stat-label">Doğru</span>
-                    <span id="team1-correct" class="stat-value">${team1Stats.correct}</span>
+                    <span class="stat-label">Doğru:</span>
+                    <span class="stat-value">${team1Stats.correct}</span>
                 </div>
                 <div class="stat-item">
-                    <span class="stat-label">Yanlış</span>
-                    <span id="team1-wrong" class="stat-value">${team1Stats.wrong}</span>
+                    <span class="stat-label">Yanlış:</span>
+                    <span class="stat-value">${team1Stats.wrong}</span>
                 </div>
                 <div class="stat-item">
-                    <span class="stat-label">Pas</span>
-                    <span id="team1-pass" class="stat-value">${team1Stats.pass}</span>
-                </div>
-                <div class="stat-item" style="grid-column: span 3;">
-                    <span class="stat-label">Toplam Puan</span>
-                    <span class="stat-value" style="color: #4CAF50;">${team1FinalScore}</span>
+                    <span class="stat-label">Pas:</span>
+                    <span class="stat-value">${team1Stats.pass}</span>
                 </div>
             </div>
         </div>
-        <div class="team-stats" style="background: linear-gradient(145deg, rgba(33, 150, 243, 0.6), rgba(33, 150, 243, 0.3));">
-            <p>${team2Name}</p>
+        <div class="team-stats">
+            <p><span class="team2-color">${team2Name}: ${team2Score} puan</span></p>
             <div class="stats-grid">
                 <div class="stat-item">
-                    <span class="stat-label">Doğru</span>
-                    <span id="team2-correct" class="stat-value">${team2Stats.correct}</span>
+                    <span class="stat-label">Doğru:</span>
+                    <span class="stat-value">${team2Stats.correct}</span>
                 </div>
                 <div class="stat-item">
-                    <span class="stat-label">Yanlış</span>
-                    <span id="team2-wrong" class="stat-value">${team2Stats.wrong}</span>
+                    <span class="stat-label">Yanlış:</span>
+                    <span class="stat-value">${team2Stats.wrong}</span>
                 </div>
                 <div class="stat-item">
-                    <span class="stat-label">Pas</span>
-                    <span id="team2-pass" class="stat-value">${team2Stats.pass}</span>
-                </div>
-                <div class="stat-item" style="grid-column: span 3;">
-                    <span class="stat-label">Toplam Puan</span>
-                    <span class="stat-value" style="color: #2196F3;">${team2FinalScore}</span>
-                </div>
-            </div>
-        </div>
-        <div class="team-stats" style="background: linear-gradient(145deg, rgba(156, 39, 176, 0.6), rgba(156, 39, 176, 0.3));">
-            <p>Genel Sonuç</p>
-            <div class="stats-grid">
-                <div class="stat-item" style="grid-column: span 3;">
-                    <span class="stat-label">Toplam Puan</span>
-                    <span class="stat-value" style="color: #9C27B0;">${totalScore}</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-label">Kazanan</span>
-                    <span class="stat-value" style="color: ${team1FinalScore > team2FinalScore ? '#4CAF50' : (team1FinalScore < team2FinalScore ? '#2196F3' : '#FFC107')};">
-                        ${team1FinalScore > team2FinalScore ? team1Name : (team1FinalScore < team2FinalScore ? team2Name : 'Berabere')}
-                    </span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-label">Zorluk</span>
-                    <span class="stat-value" style="color: ${currentDifficulty === 'easy' ? '#4CAF50' : (currentDifficulty === 'normal' ? '#2196F3' : '#F44336')};">
-                        ${currentDifficulty === 'easy' ? 'Kolay' : (currentDifficulty === 'normal' ? 'Normal' : 'Zor')}
-                    </span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-label">Branş</span>
-                    <span class="stat-value">${branchNames[currentBranch]}</span>
+                    <span class="stat-label">Pas:</span>
+                    <span class="stat-value">${team2Stats.pass}</span>
                 </div>
             </div>
         </div>
     `;
     
-    document.getElementById('final-score').innerHTML = finalScoreHTML;
-    document.getElementById('final-score-value').textContent = totalScore;
-    
-    saveScore(totalScore);
-    showHighScores();
-    
+    document.querySelector('.modal-content h2').textContent = `Oyun Bitti! Kazanan: ${winner}`;
     document.getElementById('score-modal').style.display = 'flex';
+    
+    saveScore();
+    showHighScores();
 }
 
-function saveScore(score) {
-    let date = new Date();
-    let scoreDate = `${date.getDate()}.${date.getMonth() + 1}.${date.getFullYear()} ${date.getHours()}:${date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes()}`;
+function saveScore() {
+    const selectedBranch = localStorage.getItem('selectedBranch');
+    let highScores = JSON.parse(localStorage.getItem('highScores') || '{}');
+    let gameHistory = JSON.parse(localStorage.getItem('gameHistory') || '[]');
     
-    // Yüksek puan kaydetme
-    let highScores = JSON.parse(localStorage.getItem('tabuHighScores') || '[]');
-    
-    highScores.push({
-        score: score,
-        team1: {
-            name: team1Name,
-            score: team1Score,
-            stats: team1Stats
-        },
-        team2: {
-            name: team2Name,
-            score: team2Score,
-            stats: team2Stats
-        },
-        branch: branchNames[currentBranch],
-        difficulty: currentDifficulty,
-        date: scoreDate
-    });
-    
-    // Puana göre sırala (yüksekten düşüğe)
-    highScores.sort((a, b) => b.score - a.score);
-    
-    // Maksimum 10 skoru sakla
-    if (highScores.length > 10) {
-        highScores = highScores.slice(0, 10);
+    if (!highScores[selectedBranch]) {
+        highScores[selectedBranch] = [];
     }
     
-    localStorage.setItem('tabuHighScores', JSON.stringify(highScores));
+    const newScore = {
+        team1Score: team1Score,
+        team2Score: team2Score,
+        date: new Date().toLocaleDateString(),
+        time: new Date().toLocaleTimeString()
+    };
     
-    // Oyun geçmişi kaydetme
-    let gameHistory = JSON.parse(localStorage.getItem('tabuGameHistory') || '[]');
+    highScores[selectedBranch].push(newScore);
+    highScores[selectedBranch].sort((a, b) => (b.team1Score + b.team2Score) - (a.team1Score + a.team2Score));
+    highScores[selectedBranch] = highScores[selectedBranch].slice(0, 10);
     
     gameHistory.unshift({
-        score: score,
-        team1: {
-            name: team1Name,
-            score: team1Score,
-            stats: team1Stats
-        },
-        team2: {
-            name: team2Name,
-            score: team2Score,
-            stats: team2Stats
-        },
-        branch: branchNames[currentBranch],
-        difficulty: currentDifficulty,
-        date: scoreDate
+        branch: selectedBranch,
+        branchName: branchNames[selectedBranch],
+        team1Score: team1Score,
+        team2Score: team2Score,
+        date: new Date().toLocaleDateString(),
+        time: new Date().toLocaleTimeString(),
+        questions: questions.length
     });
     
-    // Maksimum 10 oyun geçmişi sakla
-    if (gameHistory.length > 10) {
-        gameHistory = gameHistory.slice(0, 10);
-    }
+    gameHistory = gameHistory.slice(0, 20);
     
-    localStorage.setItem('tabuGameHistory', JSON.stringify(gameHistory));
+    localStorage.setItem('highScores', JSON.stringify(highScores));
+    localStorage.setItem('gameHistory', JSON.stringify(gameHistory));
 }
 
 function showHighScores() {
-    const highScoresList = document.getElementById('high-scores-list');
-    const gameHistoryList = document.getElementById('game-history-list');
+    const selectedBranch = localStorage.getItem('selectedBranch');
+    const highScores = JSON.parse(localStorage.getItem('highScores') || '{}');
+    const gameHistory = JSON.parse(localStorage.getItem('gameHistory') || '[]');
+    const scoresList = document.getElementById('high-scores-list');
+    const historyList = document.getElementById('game-history-list');
     
-    // Yüksek skorları göster
-    let highScores = JSON.parse(localStorage.getItem('tabuHighScores') || '[]');
-    
-    highScoresList.innerHTML = '';
-    
-    if (highScores.length === 0) {
-        highScoresList.innerHTML = '<li>Henüz yüksek puan yok!</li>';
-    } else {
-        highScores.forEach((item, index) => {
-            let difficultyClass = item.difficulty === 'easy' ? 'easy' : (item.difficulty === 'normal' ? 'normal' : 'hard');
-            let difficultyText = item.difficulty === 'easy' ? 'Kolay' : (item.difficulty === 'normal' ? 'Normal' : 'Zor');
-            
-            highScoresList.innerHTML += `
-                <li>
-                    <strong>${index + 1}.</strong> ${item.score} puan - 
-                    ${item.team1.name}: ${item.team1.score}, 
-                    ${item.team2.name}: ${item.team2.score} | 
-                    <span class="${difficultyClass}">${difficultyText}</span> - 
-                    ${item.branch} - 
-                    ${item.date}
-                </li>
-            `;
+    scoresList.innerHTML = '';
+    if (highScores[selectedBranch] && highScores[selectedBranch].length > 0) {
+        highScores[selectedBranch].forEach((score, index) => {
+            const li = document.createElement('li');
+            li.textContent = `${index + 1}. Takım 1: ${score.team1Score} | Takım 2: ${score.team2Score} (${score.date} ${score.time})`;
+            scoresList.appendChild(li);
         });
+    } else {
+        const li = document.createElement('li');
+        li.textContent = 'Henüz skor yok';
+        scoresList.appendChild(li);
     }
     
-    // Oyun geçmişini göster
-    let gameHistory = JSON.parse(localStorage.getItem('tabuGameHistory') || '[]');
-    
-    gameHistoryList.innerHTML = '';
-    
-    if (gameHistory.length === 0) {
-        gameHistoryList.innerHTML = '<li>Henüz oyun geçmişi yok!</li>';
-    } else {
-        gameHistory.forEach((item) => {
-            let difficultyClass = item.difficulty === 'easy' ? 'easy' : (item.difficulty === 'normal' ? 'normal' : 'hard');
-            let difficultyText = item.difficulty === 'easy' ? 'Kolay' : (item.difficulty === 'normal' ? 'Normal' : 'Zor');
-            let winner = item.team1.score > item.team2.score ? item.team1.name : (item.team1.score < item.team2.score ? item.team2.name : 'Berabere');
-            
-            gameHistoryList.innerHTML += `
-                <li>
-                    <strong>${winner}</strong> - ${item.score} puan | 
-                    <span class="${difficultyClass}">${difficultyText}</span> - 
-                    ${item.branch} - 
-                    ${item.date}
-                </li>
-            `;
+    historyList.innerHTML = '';
+    if (gameHistory.length > 0) {
+        gameHistory.forEach(game => {
+            const li = document.createElement('li');
+            li.textContent = `${game.branchName}: Takım 1: ${game.team1Score} | Takım 2: ${game.team2Score} (${game.date} ${game.time})`;
+            historyList.appendChild(li);
         });
-    }
-    
-    // Ayrı bir skor görüntüleme modalı için de aynı verileri hazırla
-    if (document.getElementById('high-scores-list-view')) {
-        const highScoresListView = document.getElementById('high-scores-list-view');
-        const gameHistoryListView = document.getElementById('game-history-list-view');
-        
-        highScoresListView.innerHTML = highScoresList.innerHTML;
-        gameHistoryListView.innerHTML = gameHistoryList.innerHTML;
+    } else {
+        const li = document.createElement('li');
+        li.textContent = 'Henüz oyun geçmişi yok';
+        historyList.appendChild(li);
     }
 }
 
@@ -2064,22 +1951,6 @@ function setupEventListeners() {
     document.getElementById('main-menu').addEventListener('click', () => {
         window.location.href = 'index.html';
     });
-    
-    // Skor modalı kapama butonu
-    if (document.getElementById('close-scores-btn')) {
-        document.getElementById('close-scores-btn').addEventListener('click', function() {
-            document.getElementById('scores-modal').style.display = 'none';
-        });
-    }
-    
-    // Header'daki skor linki
-    if (document.querySelector('.header-scores')) {
-        document.querySelector('.header-scores').addEventListener('click', function(e) {
-            e.preventDefault();
-            showHighScores(); // Skorları güncelle
-            document.getElementById('scores-modal').style.display = 'flex';
-        });
-    }
 }
 
 function startGame() {
