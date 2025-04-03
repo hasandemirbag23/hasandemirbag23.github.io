@@ -265,6 +265,20 @@ h2 {
         font-size: 1.6em;
         padding: 12px 20px;
     }
+
+    .stats-display {
+        padding: 6px 12px;
+    }
+    
+    .stats-display .stat-icon {
+        font-size: 1em;
+        width: 20px;
+        height: 20px;
+    }
+    
+    .stats-display .stat-value {
+        font-size: 0.9em;
+    }
 }
 
 @media (max-width: 600px) {
@@ -278,6 +292,25 @@ h2 {
     #main-word {
         font-size: 1.4em;
         padding: 10px;
+    }
+
+    .stats-display {
+        padding: 5px 10px;
+        gap: 5px;
+    }
+    
+    .stats-display .stat-item {
+        gap: 5px;
+    }
+    
+    .stats-display .stat-icon {
+        font-size: 0.9em;
+        width: 18px;
+        height: 18px;
+    }
+    
+    .stats-display .stat-value {
+        font-size: 0.8em;
     }
 }
 
@@ -525,7 +558,11 @@ h2 {
     }
     
     #final-score .stats-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    #final-score .stat-item[style*="grid-column: span 3"] {
+        grid-column: span 2 !important;
     }
     
     .modal-content h2 {
@@ -584,13 +621,13 @@ h2 {
 
 #final-score {
     margin: 20px auto;
-    max-width: 800px;
+    max-width: 100%;
     animation: fadeIn 0.5s ease;
 }
 
 #final-score .team-stats {
-    margin: 25px 0;
-    padding: 30px;
+    margin: 20px 0;
+    padding: 20px;
     background: linear-gradient(145deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.2));
     border-radius: 20px;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
@@ -600,13 +637,13 @@ h2 {
 }
 
 #final-score .team-stats:hover {
-    transform: translateY(-8px) scale(1.02);
+    transform: translateY(-5px);
     box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
 }
 
 #final-score .team-stats p {
-    font-size: 2em;
-    margin-bottom: 20px;
+    font-size: 1.8em;
+    margin-bottom: 15px;
     text-align: center;
     font-weight: bold;
     background: linear-gradient(45deg, #fff, #f0f0f0);
@@ -619,56 +656,31 @@ h2 {
 #final-score .stats-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-    padding: 15px;
+    gap: 15px;
+    padding: 10px;
 }
 
 #final-score .stat-item {
-    background: rgba(255, 255, 255, 0.1);
-    padding: 20px;
+    background: rgba(255, 255, 255, 0.15);
+    padding: 15px;
     border-radius: 15px;
     text-align: center;
     transition: all 0.3s ease;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    position: relative;
+    border: 1px solid rgba(255, 255, 255, 0.2);
     overflow: hidden;
-}
-
-#final-score .stat-item::before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
-    transform: rotate(45deg);
-    transition: all 0.6s ease;
-    opacity: 0;
-}
-
-#final-score .stat-item:hover::before {
-    opacity: 1;
-    transform: rotate(45deg) translate(0%, 0%);
-}
-
-#final-score .stat-item:hover {
-    transform: scale(1.1);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
 }
 
 #final-score .stat-label {
     display: block;
-    font-size: 1.2em;
+    font-size: 1.1em;
     color: #fff;
-    margin-bottom: 10px;
-    text-transform: uppercase;
+    margin-bottom: 8px;
     letter-spacing: 1px;
 }
 
 #final-score .stat-value {
     display: block;
-    font-size: 2.2em;
+    font-size: 2em;
     font-weight: bold;
     text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
     animation: countUp 1s ease-out;
@@ -754,41 +766,146 @@ h2 {
 }
 
 .scores-container {
-    overflow-y: auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    overflow-y: visible;
     padding: 10px 0;
     margin-bottom: 20px;
 }
 
 .high-scores, .game-history {
-    background: #f8f9fa;
+    background: rgba(248, 249, 250, 0.95);
     padding: 20px;
     border-radius: 15px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
+    transition: all 0.3s ease;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.high-scores:hover, .game-history:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
 }
 
 .high-scores h3, .game-history h3 {
     color: #2c3e50;
     margin-bottom: 15px;
     font-size: 1.3em;
+    text-align: center;
+    padding-bottom: 10px;
+    border-bottom: 2px solid rgba(0, 0, 0, 0.1);
 }
 
 .high-scores ul, .game-history ul {
     list-style: none;
-    max-height: 200px;
+    flex-grow: 1;
     overflow-y: auto;
+    max-height: 250px;
+    scrollbar-width: thin;
 }
 
 .high-scores li, .game-history li {
-    padding: 10px;
-    margin: 5px 0;
+    padding: 12px 15px;
+    margin: 8px 0;
     background: white;
-    border-radius: 8px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-    transition: transform 0.2s ease;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
+    transition: all 0.2s ease;
+    border-left: 4px solid transparent;
+    font-size: 0.95em;
 }
 
 .high-scores li:hover, .game-history li:hover {
-    transform: translateX(10px);
+    transform: translateX(5px);
+    border-left-color: #4CAF50;
+    background: #f9f9f9;
+}
+
+.high-scores li:nth-child(1) {
+    border-left-color: gold;
+    background: rgba(255, 215, 0, 0.1);
+}
+
+.high-scores li:nth-child(2) {
+    border-left-color: silver;
+    background: rgba(192, 192, 192, 0.1);
+}
+
+.high-scores li:nth-child(3) {
+    border-left-color: #cd7f32;
+    background: rgba(205, 127, 50, 0.1);
+}
+
+/* Responsive düzenlemeler */
+@media (max-width: 768px) {
+    #final-score .team-stats p {
+        font-size: 1.5em;
+    }
+    
+    #final-score .stat-label {
+        font-size: 0.9em;
+    }
+    
+    #final-score .stat-value {
+        font-size: 1.6em;
+    }
+    
+    .scores-container {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    
+    .high-scores ul, .game-history ul {
+        max-height: 200px;
+    }
+    
+    .high-scores li, .game-history li {
+        padding: 10px;
+        font-size: 0.85em;
+    }
+}
+
+@media (max-width: 480px) {
+    #final-score .team-stats {
+        padding: 15px;
+    }
+    
+    #final-score .team-stats p {
+        font-size: 1.3em;
+        margin-bottom: 10px;
+    }
+    
+    #final-score .stats-grid {
+        gap: 10px;
+        padding: 5px;
+    }
+    
+    #final-score .stat-item {
+        padding: 10px;
+    }
+    
+    #final-score .stat-label {
+        font-size: 0.8em;
+        margin-bottom: 5px;
+    }
+    
+    #final-score .stat-value {
+        font-size: 1.4em;
+    }
+    
+    .high-scores h3, .game-history h3 {
+        font-size: 1.1em;
+    }
+    
+    .high-scores li, .game-history li {
+        padding: 8px 10px;
+        font-size: 0.8em;
+        margin: 5px 0;
+    }
 }
 
 /* Özel Scrollbar */
@@ -1055,4 +1172,221 @@ h2 {
     box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
 }
 
-/* Bu satırdan sonraki eski responsive kodlar silinebilir çünkü yukarıda ekledim */   
+/* Bu satırdan sonraki eski responsive kodlar silinebilir çünkü yukarıda ekledim */
+
+.difficulty-selection {
+    margin-top: 20px;
+    border-top: 1px solid #e3e3e3;
+    padding-top: 15px;
+}
+
+.difficulty-selection h3 {
+    margin-bottom: 15px;
+    font-size: 1.2em;
+    color: #333;
+}
+
+.difficulty-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.difficulty-btn {
+    padding: 8px 20px;
+    border: none;
+    border-radius: 25px;
+    background: linear-gradient(to bottom, #f5f5f5, #e3e3e3);
+    color: #333;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.difficulty-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+.difficulty-btn.active {
+    background: linear-gradient(to bottom, #4CAF50, #45a049);
+    color: white;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.difficulty-btn[data-difficulty="easy"].active {
+    background: linear-gradient(to bottom, #4CAF50, #45a049);
+}
+
+.difficulty-btn[data-difficulty="normal"].active {
+    background: linear-gradient(to bottom, #2196F3, #1976D2);
+}
+
+.difficulty-btn[data-difficulty="hard"].active {
+    background: linear-gradient(to bottom, #F44336, #D32F2F);
+}
+
+.difficulty-info {
+    font-size: 0.85em;
+    color: #666;
+    text-align: center;
+    margin-top: 10px;
+}
+
+.easy-info, .normal-info, .hard-info {
+    margin: 5px 0;
+}
+
+/* İstatistik göstergeleri ile ilgili tüm stiller kaldırıldı */
+/* 
+.stats-display {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+    background: rgba(248, 249, 250, 0.95);
+    padding: 8px 16px;
+    border-radius: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    backdrop-filter: blur(5px);
+    font-weight: bold;
+}
+
+.stats-display .stat-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.stats-display .stat-icon {
+    font-size: 1.2em;
+    width: 25px;
+    height: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+}
+
+.stats-display .stat-icon.correct {
+    color: #4CAF50;
+    background-color: rgba(76, 175, 80, 0.2);
+}
+
+.stats-display .stat-icon.wrong {
+    color: #F44336;
+    background-color: rgba(244, 67, 54, 0.2);
+}
+
+.stats-display .stat-icon.pass {
+    color: #FFC107;
+    background-color: rgba(255, 193, 7, 0.2);
+}
+
+.stats-display .stat-value {
+    font-weight: bold;
+    color: #333;
+}
+*/
+
+.stats-display, .stats-display .stat-item, .stats-display .stat-icon, .stats-display .stat-icon.correct, .stats-display .stat-icon.wrong, .stats-display .stat-icon.pass, .stats-display .stat-value {
+    display: none;
+}
+
+.easy, .easy-info {
+    color: #4CAF50 !important;
+    font-weight: bold;
+}
+
+.normal, .normal-info {
+    color: #2196F3 !important;
+    font-weight: bold;
+}
+
+.hard, .hard-info {
+    color: #F44336 !important;
+    font-weight: bold;
+}
+
+@media (max-width: 480px) {
+    #final-score .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    #final-score .stat-item[style*="grid-column: span 3"] {
+        grid-column: span 2 !important;
+    }
+}
+
+header {
+    background: linear-gradient(90deg, #4CAF50, #2196F3);
+    padding: 10px 0;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    position: relative;
+    z-index: 100;
+}
+
+header .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+
+header h1 {
+    color: white;
+    font-size: 1.8em;
+    margin: 0;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+header h1::after {
+    display: none;
+}
+
+header nav ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+    margin: 0;
+    padding: 0;
+}
+
+header nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 1.1em;
+    transition: all 0.3s ease;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+header nav a:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+}
+
+@media (max-width: 600px) {
+    header .container {
+        flex-direction: column;
+        padding: 10px;
+        gap: 10px;
+    }
+    
+    header h1 {
+        font-size: 1.5em;
+    }
+    
+    header nav ul {
+        gap: 10px;
+    }
+    
+    header nav a {
+        font-size: 0.9em;
+        padding: 3px 8px;
+    }
+}   /* Bu satırdan sonraki eski responsive kodlar silinebilir çünkü yukarıda ekledim */   
