@@ -23,7 +23,8 @@ const branchNames = {
     din: 'Din Kültürü',
     gorsel: 'Görsel Sanatlar',
     muzik: 'Müzik',
-    ingilizce: 'İngilizce'
+    ingilizce: 'İngilizce',
+    'genel-kultur': 'Genel Kültür'
 };
 
 const difficultySettings = {
@@ -1141,6 +1142,208 @@ const allQuestions = {
         {
             mainWord: "Bus Stop",
             tabuWords: ["Bus", "Travel", "Wait", "Ticket", "Route"]
+        }
+    ],
+    'genel-kultur': [
+        {
+            mainWord: "Rönesans",
+            tabuWords: ["Yeniden Doğuş", "Reform", "İtalya", "Sanat", "Bilim"]
+        },
+        {
+            mainWord: "Mona Lisa",
+            tabuWords: ["Leonardo", "da Vinci", "Tablo", "Kadın", "Gülümseme"]
+        },
+        {
+            mainWord: "Eyfel Kulesi",
+            tabuWords: ["Paris", "Fransa", "Demir", "Yapı", "Turistik"]
+        },
+        {
+            mainWord: "Piramitler",
+            tabuWords: ["Mısır", "Firavun", "Mezar", "Sfenks", "Taş"]
+        },
+        {
+            mainWord: "Pandemi",
+            tabuWords: ["Salgın", "Hastalık", "Dünya", "Virüs", "Maske"]
+        },
+        {
+            mainWord: "Demokrasi",
+            tabuWords: ["Yönetim", "Halk", "Seçim", "Oy", "Sistem"]
+        },
+        {
+            mainWord: "Astronot",
+            tabuWords: ["Uzay", "Roket", "NASA", "Yerçekimi", "Gezegenler"]
+        },
+        {
+            mainWord: "Nobel Ödülü",
+            tabuWords: ["Bilim", "Ödül", "Alfred", "Dinamit", "İsveç"]
+        },
+        {
+            mainWord: "Antik Roma",
+            tabuWords: ["İmparatorluk", "Gladyatör", "Kolezyum", "Sezar", "Medeniyet"]
+        },
+        {
+            mainWord: "Osmanlı",
+            tabuWords: ["Padişah", "İmparatorluk", "Topkapı", "Fatih", "Türk"]
+        },
+        {
+            mainWord: "Mozart",
+            tabuWords: ["Besteci", "Müzik", "Avusturya", "Klasik", "Senfoni"]
+        },
+        {
+            mainWord: "Picasso",
+            tabuWords: ["Ressam", "Tablo", "Kübizm", "İspanya", "Sanat"]
+        },
+        {
+            mainWord: "Shakespare",
+            tabuWords: ["Yazar", "Tiyatro", "İngiliz", "Hamlet", "Oyun"]
+        },
+        {
+            mainWord: "Everest",
+            tabuWords: ["Dağ", "Zirve", "Yüksek", "Himalayalar", "Tırmanış"]
+        },
+        {
+            mainWord: "Ninjaları",
+            tabuWords: ["Japonya", "Savaşçı", "Gizli", "Samuray", "Silah"]
+        },
+        {
+            mainWord: "Vatikan",
+            tabuWords: ["Papa", "Katolik", "Kilise", "Roma", "Şehir"]
+        },
+        {
+            mainWord: "Burç Kalifa",
+            tabuWords: ["Dubai", "Gökdelen", "Bina", "Yüksek", "Mimari"]
+        },
+        {
+            mainWord: "Amazon",
+            tabuWords: ["Orman", "Nehir", "Güney Amerika", "Brezilya", "Yağmur"]
+        },
+        {
+            mainWord: "Tarkan",
+            tabuWords: ["Şarkıcı", "Türk", "Pop", "Müzik", "Albüm"]
+        },
+        {
+            mainWord: "Titanik",
+            tabuWords: ["Gemi", "Batık", "Buz Dağı", "Okyanus", "Film"]
+        },
+        {
+            mainWord: "Tesla",
+            tabuWords: ["Elektrik", "Araba", "Elon Musk", "Şirket", "Batarya"]
+        },
+        {
+            mainWord: "Samanyolu",
+            tabuWords: ["Galaksi", "Yıldız", "Güneş", "Uzay", "Sistem"]
+        },
+        {
+            mainWord: "Sinema",
+            tabuWords: ["Film", "Oscar", "Hollywood", "Seyirci", "Perde"]
+        },
+        {
+            mainWord: "Olimpiyat",
+            tabuWords: ["Spor", "Madalya", "Yarışma", "Atlet", "Oyunlar"]
+        },
+        {
+            mainWord: "Kraliçe",
+            tabuWords: ["Taç", "İngiltere", "Elizabeth", "Saray", "Monarşi"]
+        },
+        {
+            mainWord: "Van Gogh",
+            tabuWords: ["Ressam", "Kulak", "Yıldızlı Gece", "Hollanda", "Ayçiçekleri"]
+        },
+        {
+            mainWord: "Termometre",
+            tabuWords: ["Sıcaklık", "Ateş", "Derece", "Ölçü", "Civa"]
+        },
+        {
+            mainWord: "Barış Manço",
+            tabuWords: ["Şarkıcı", "Adam Olacak Çocuk", "Dönence", "Sanatçı", "Anadolu Rock"]
+        },
+        {
+            mainWord: "DNA",
+            tabuWords: ["Gen", "Kalıtım", "Kromozom", "Test", "Yapı"]
+        },
+        {
+            mainWord: "Saat Kulesi",
+            tabuWords: ["İzmir", "Konak", "Zaman", "Yapı", "Meydan"]
+        },
+        {
+            mainWord: "Atatürk",
+            tabuWords: ["Cumhuriyet", "Lider", "Türkiye", "Kurtuluş", "Devrim"]
+        },
+        {
+            mainWord: "İstanbul",
+            tabuWords: ["Boğaz", "Şehir", "Galata", "Ayasofya", "Türkiye"]
+        },
+        {
+            mainWord: "Antartika",
+            tabuWords: ["Kutup", "Buz", "Penguen", "Kıta", "Soğuk"]
+        },
+        {
+            mainWord: "Kapadokya",
+            tabuWords: ["Peri Bacaları", "Nevşehir", "Balon", "Kaya", "Turizm"]
+        },
+        {
+            mainWord: "Pamukkale",
+            tabuWords: ["Denizli", "Travertenler", "Beyaz", "Termal", "Hierapolis"]
+        },
+        {
+            mainWord: "Efes",
+            tabuWords: ["Antik Kent", "İzmir", "Artemis", "Selçuk", "Kütüphane"]
+        },
+        {
+            mainWord: "Nemrut Dağı",
+            tabuWords: ["Adıyaman", "Heykeller", "Kommagene", "Güneş", "Tümülüs"]
+        },
+        {
+            mainWord: "Göbeklitepe",
+            tabuWords: ["Şanlıurfa", "Arkeoloji", "Tapınak", "Tarih", "Taş"]
+        },
+        {
+            mainWord: "Mısır",
+            tabuWords: ["Piramit", "Firavun", "Nil", "Kahire", "Sfenks"]
+        },
+        {
+            mainWord: "Yunan Mitolojisi",
+            tabuWords: ["Zeus", "Tanrı", "Olimpos", "Herkül", "Efsane"]
+        },
+        {
+            mainWord: "Roma İmparatorluğu",
+            tabuWords: ["Sezar", "Kolezyum", "İtalya", "Antik", "Gladyatör"]
+        },
+        {
+            mainWord: "Aztek",
+            tabuWords: ["Meksika", "Uygarlık", "Maya", "Tapınak", "Amerika"]
+        },
+        {
+            mainWord: "Çin Seddi",
+            tabuWords: ["Duvar", "Çin", "Uzun", "Savunma", "İmparator"]
+        },
+        {
+            mainWord: "Selçuklu",
+            tabuWords: ["Türk", "Anadolu", "Devlet", "Cami", "Medrese"]
+        },
+        {
+            mainWord: "Safir",
+            tabuWords: ["Mavi", "Değerli", "Taş", "Mücevher", "Yüzük"]
+        },
+        {
+            mainWord: "Albert Einstein",
+            tabuWords: ["Bilim Adamı", "İzafiyet", "Fizik", "Nobel", "Formül"]
+        },
+        {
+            mainWord: "Galileo",
+            tabuWords: ["Astronomi", "Teleskop", "İtalya", "Dünya", "Bilim"]
+        },
+        {
+            mainWord: "Isaac Newton",
+            tabuWords: ["Yerçekimi", "Elma", "Fizik", "Bilim", "Kanun"]
+        },
+        {
+            mainWord: "Leonardo da Vinci",
+            tabuWords: ["Ressam", "Mona Lisa", "İtalya", "Mucit", "Rönesans"]
+        },
+        {
+            mainWord: "Stephen Hawking",
+            tabuWords: ["Fizikçi", "Kara Delik", "Tekerlekli Sandalye", "Evren", "Zaman"]
         }
     ]
 };
